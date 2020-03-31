@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/startscreen_customer_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customer" />
+
+        <Button
+            android:id="@+id/startscreen_stock_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock" />
+
+        <Button
+            android:id="@+id/startscreen_transaction_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transaction" />
+
+        <Button
+            android:id="@+id/startscreen_sale_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sale" />
+    </LinearLayout>
+</layout>

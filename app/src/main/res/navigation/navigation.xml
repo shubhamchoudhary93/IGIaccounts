@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startScreenFragment">
+
+    <fragment
+        android:id="@+id/startScreenFragment"
+        android:name="com.shubham.igiaccounts.startscreen.StartScreenFragment"
+        android:label="StartScreenFragment"
+        tools:layout="@layout/startscreen">
+        <action
+            android:id="@+id/action_startScreenFragment_to_customerScreenFragment"
+            app:destination="@id/customerScreenFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_saleScreenFragment"
+            app:destination="@id/stockScreenFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_stockScreenFragment"
+            app:destination="@id/stockScreenFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_transactionScreenFragment"
+            app:destination="@id/transactionScreenFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/customerDetailsScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customerdetailsscreen.CustomerDetailsScreenFragment"
+        android:label="CustomerDetailsScreenFragment"
+        tools:layout="@layout/customer_detail_screen">
+        <action
+            android:id="@+id/action_customerDetailsScreenFragment_to_customerListOfSaleScreenFragment"
+            app:destination="@id/customerListOfSaleScreenFragment" />
+        <action
+            android:id="@+id/action_customerDetailsScreenFragment_to_customerListOfTransactionScreenFragment"
+            app:destination="@id/customerListOfTransactionScreenFragment" />
+        <action
+            android:id="@+id/action_customerDetailsScreenFragment_to_customerModifyScreenFragment"
+            app:destination="@id/customerModifyScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerListOfSaleScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customerlistofsalescreen.CustomerListOfSaleScreenFragment"
+        android:label="CustomerListOfSaleScreenFragment"
+        tools:layout="@layout/customer_listofsale_screen">
+        <action
+            android:id="@+id/action_customerListOfSaleScreenFragment_to_saleDetailsScreenFragment"
+            app:destination="@id/saleDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerListScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customerlistscreen.CustomerListScreenFragment"
+        android:label="CustomerListScreenFragment"
+        tools:layout="@layout/customer_list_screen">
+        <action
+            android:id="@+id/action_customerListScreenFragment_to_customerDetailsScreenFragment"
+            app:destination="@id/customerDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerListOfTransactionScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customerlistoftransactionscreen.CustomerListOfTransactionScreenFragment"
+        android:label="CustomerListOfTransactionScreenFragment"
+        tools:layout="@layout/customer_listoftransaction_screen">
+        <action
+            android:id="@+id/action_customerListOfTransactionScreenFragment_to_transactionDetailsScreenFragment"
+            app:destination="@id/transactionDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerModifyScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customermodifyscreen.CustomerModifyScreenFragment"
+        android:label="CustomerModifyScreenFragment"
+        tools:layout="@layout/customer_modify_screen">
+        <action
+            android:id="@+id/action_customerModifyScreenFragment_to_customerDetailsScreenFragment"
+            app:destination="@id/customerDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerNewScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customernewscreen.CustomerNewScreenFragment"
+        android:label="CustomerNewScreenFragment"
+        tools:layout="@layout/customer_new_screen">
+        <action
+            android:id="@+id/action_customerNewScreenFragment_to_customerDetailsScreenFragment"
+            app:destination="@id/customerDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerScreenFragment"
+        android:name="com.shubham.igiaccounts.customer.customerscreen.CustomerScreenFragment"
+        android:label="CustomerScreenFragment"
+        tools:layout="@layout/customer_screen">
+        <action
+            android:id="@+id/action_customerScreenFragment_to_customerNewScreenFragment"
+            app:destination="@id/customerNewScreenFragment" />
+        <action
+            android:id="@+id/action_customerScreenFragment_to_customerListScreenFragment"
+            app:destination="@id/customerListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleDetailsScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.saledetailsscreen.SaleDetailsScreenFragment"
+        android:label="SaleDetailsScreenFragment"
+        tools:layout="@layout/sale_details">
+        <action
+            android:id="@+id/action_saleDetailsScreenFragment_to_saleModifyScreenFragment"
+            app:destination="@id/saleModifyScreenFragment" />
+        <action
+            android:id="@+id/action_saleDetailsScreenFragment_to_saleListScreenFragment"
+            app:destination="@id/saleListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleListScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salelistscreen.SaleListScreenFragment"
+        android:label="SaleListScreenFragment"
+        tools:layout="@layout/sale_list_screen">
+        <action
+            android:id="@+id/action_saleListScreenFragment_to_saleDetailsScreenFragment"
+            app:destination="@id/saleDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleModifyScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salemodifyscreen.SaleModifyScreenFragment"
+        android:label="SaleModifyScreenFragment"
+        tools:layout="@layout/sale_modify_screen">
+        <action
+            android:id="@+id/action_saleModifyScreenFragment_to_saleDetailsScreenFragment"
+            app:destination="@id/saleDetailsScreenFragment" />
+        <action
+            android:id="@+id/action_saleModifyScreenFragment_to_saleListScreenFragment"
+            app:destination="@id/saleListScreenFragment" />
+        <action
+            android:id="@+id/action_saleModifyScreenFragment_to_saleItemModifyScreenFragment"
+            app:destination="@id/saleItemModifyScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleNewItemAddScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salenewitemaddscreen.SaleNewItemAddScreenFragment"
+        android:label="SaleNewItemAddScreenFragment"
+        tools:layout="@layout/sale_new_item_add_screen">
+        <action
+            android:id="@+id/action_saleNewItemAddScreenFragment_to_saleNewScreenFragment"
+            app:destination="@id/saleNewScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleNewScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salenewscreen.SaleNewScreenFragment"
+        android:label="SaleNewScreenFragment"
+        tools:layout="@layout/sale_new_screen">
+        <action
+            android:id="@+id/action_saleNewScreenFragment_to_saleNewItemAddScreenFragment"
+            app:destination="@id/saleNewItemAddScreenFragment" />
+        <action
+            android:id="@+id/action_saleNewScreenFragment_to_salePreviewScreenFragment"
+            app:destination="@id/salePreviewScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salePreviewScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salepreviewscreen.SalePreviewScreenFragment"
+        android:label="SalePreviewScreenFragment"
+        tools:layout="@layout/sale_preview_screen" />
+    <fragment
+        android:id="@+id/saleScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.salescreen.SaleScreenFragment"
+        android:label="SaleScreenFragment"
+        tools:layout="@layout/sale_screen">
+        <action
+            android:id="@+id/action_saleScreenFragment_to_saleNewScreenFragment"
+            app:destination="@id/saleNewScreenFragment" />
+        <action
+            android:id="@+id/action_saleScreenFragment_to_saleListScreenFragment"
+            app:destination="@id/saleListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockDetailsScreenFragment2"
+        android:name="com.shubham.igiaccounts.stock.stockdetailsscreen.StockDetailsScreenFragment"
+        android:label="StockDetailsScreenFragment"
+        tools:layout="@layout/stock_detail_screen">
+        <action
+            android:id="@+id/action_stockDetailsScreenFragment2_to_stockModifyScreenFragment"
+            app:destination="@id/stockModifyScreenFragment" />
+        <action
+            android:id="@+id/action_stockDetailsScreenFragment2_to_stockListScreenFragment"
+            app:destination="@id/stockListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockListScreenFragment"
+        android:name="com.shubham.igiaccounts.stock.stocklistscreen.StockListScreenFragment"
+        android:label="StockListScreenFragment"
+        tools:layout="@layout/stock_list_screen">
+        <action
+            android:id="@+id/action_stockListScreenFragment_to_stockDetailsScreenFragment2"
+            app:destination="@id/stockDetailsScreenFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockModifyScreenFragment"
+        android:name="com.shubham.igiaccounts.stock.stockmodifyscreen.StockModifyScreenFragment"
+        android:label="StockModifyScreenFragment"
+        tools:layout="@layout/stock_modify_screen">
+        <action
+            android:id="@+id/action_stockModifyScreenFragment_to_stockDetailsScreenFragment2"
+            app:destination="@id/stockDetailsScreenFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockNewScreenFragment"
+        android:name="com.shubham.igiaccounts.stock.stocknewscreen.StockNewScreenFragment"
+        android:label="StockNewScreenFragment"
+        tools:layout="@layout/stock_new_screen">
+        <action
+            android:id="@+id/action_stockNewScreenFragment_to_stockDetailsScreenFragment2"
+            app:destination="@id/stockDetailsScreenFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockScreenFragment"
+        android:name="com.shubham.igiaccounts.stock.stockscreen.StockScreenFragment"
+        android:label="StockScreenFragment"
+        tools:layout="@layout/stock_screen">
+        <action
+            android:id="@+id/action_stockScreenFragment_to_stockNewScreenFragment"
+            app:destination="@id/stockNewScreenFragment" />
+        <action
+            android:id="@+id/action_stockScreenFragment_to_stockListScreenFragment"
+            app:destination="@id/stockListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionDetailsScreenFragment"
+        android:name="com.shubham.igiaccounts.transaction.transactiondetailsscreen.TransactionDetailsScreenFragment"
+        android:label="TransactionDetailsScreenFragment"
+        tools:layout="@layout/transaction_detail_screen">
+        <action
+            android:id="@+id/action_transactionDetailsScreenFragment_to_transactionModifyScreenFragment"
+            app:destination="@id/transactionModifyScreenFragment" />
+        <action
+            android:id="@+id/action_transactionDetailsScreenFragment_to_customerListOfTransactionScreenFragment"
+            app:destination="@id/customerListOfTransactionScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionListScreenFragment"
+        android:name="com.shubham.igiaccounts.transaction.transactionlistscreen.TransactionListScreenFragment"
+        android:label="TransactionListScreenFragment"
+        tools:layout="@layout/transaction_list_screen">
+        <action
+            android:id="@+id/action_transactionListScreenFragment_to_transactionDetailsScreenFragment"
+            app:destination="@id/transactionDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionModifyScreenFragment"
+        android:name="com.shubham.igiaccounts.transaction.transactionmodifyscreen.TransactionModifyScreenFragment"
+        android:label="TransactionModifyScreenFragment"
+        tools:layout="@layout/transaction_modify_screen">
+        <action
+            android:id="@+id/action_transactionModifyScreenFragment_to_transactionDetailsScreenFragment"
+            app:destination="@id/transactionDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionNewScreenFragment"
+        android:name="com.shubham.igiaccounts.transaction.transactionnewscreen.TransactionNewScreenFragment"
+        android:label="TransactionNewScreenFragment"
+        tools:layout="@layout/transaction_new_screen">
+        <action
+            android:id="@+id/action_transactionNewScreenFragment_to_transactionDetailsScreenFragment"
+            app:destination="@id/transactionDetailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionScreenFragment"
+        android:name="com.shubham.igiaccounts.transaction.transactionscreen.TransactionScreenFragment"
+        android:label="TransactionScreenFragment"
+        tools:layout="@layout/transaction_screen">
+        <action
+            android:id="@+id/action_transactionScreenFragment_to_transactionNewScreenFragment"
+            app:destination="@id/transactionNewScreenFragment" />
+        <action
+            android:id="@+id/action_transactionScreenFragment_to_transactionListScreenFragment"
+            app:destination="@id/transactionListScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleItemModifyScreenFragment"
+        android:name="com.shubham.igiaccounts.sale.saleitemmodifyscreen.SaleItemModifyScreenFragment"
+        android:label="SaleItemModifyScreenFragment"
+        tools:layout="@layout/sale_item_modify_screen">
+        <action
+            android:id="@+id/action_saleItemModifyScreenFragment_to_saleModifyScreenFragment"
+            app:destination="@id/saleModifyScreenFragment" />
+    </fragment>
+</navigation>

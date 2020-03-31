@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/saleScreenFragment"
+        android:title="Sale" />
+    <item
+        android:id="@+id/stockScreenFragment"
+        android:title="Stock" />
+    <item
+        android:id="@+id/transactionScreenFragment"
+        android:title="Transaction" />
+    <item
+        android:id="@+id/customerScreenFragment"
+        android:title="Customer" />
+</menu>
