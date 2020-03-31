@@ -29,5 +29,6 @@ class CustomerNewScreenFragment : Fragment() {
             view?.findNavController()
                 ?.navigate(R.id.action_customerNewScreenFragment_to_customerDetailsScreenFragment)
         }
+
     }
 }

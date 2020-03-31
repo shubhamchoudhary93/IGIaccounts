@@ -17,11 +17,12 @@ class CustomerListOfSaleScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<CustomerListofsaleScreenBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.customer_listofsale_screen, container, false
         )
         setListeners()
+
         return binding.root
     }
 

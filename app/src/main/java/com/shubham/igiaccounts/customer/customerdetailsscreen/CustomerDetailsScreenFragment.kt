@@ -44,4 +44,5 @@ class CustomerDetailsScreenFragment : Fragment() {
                 ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerListOfTransactionScreenFragment)
         }
     }
+
 }

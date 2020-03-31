@@ -30,5 +30,9 @@ class CustomerScreenFragment : Fragment() {
             view?.findNavController()
                 ?.navigate(R.id.action_customerScreenFragment_to_customerNewScreenFragment)
         }
+        binding.customerScreenListButton.setOnClickListener {
+            view?.findNavController()
+                ?.navigate(R.id.action_customerScreenFragment_to_customerListScreenFragment)
+        }
     }
 }
