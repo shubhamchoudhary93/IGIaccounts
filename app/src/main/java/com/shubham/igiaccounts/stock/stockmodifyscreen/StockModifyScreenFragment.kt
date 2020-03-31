@@ -20,6 +20,7 @@ class StockModifyScreenFragment : Fragment() {
             inflater,
             R.layout.stock_modify_screen, container, false
         )
+        setListeners()
         return binding.root
     }
 

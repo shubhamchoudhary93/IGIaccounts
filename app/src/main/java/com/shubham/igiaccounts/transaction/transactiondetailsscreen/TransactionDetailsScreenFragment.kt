@@ -32,7 +32,7 @@ class TransactionDetailsScreenFragment : Fragment() {
         }
         binding.transactionListScreenDeleteButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_transactionDetailsScreenFragment_to_customerListOfTransactionScreenFragment)
+                ?.navigate(R.id.action_transactionDetailsScreenFragment_to_transactionListScreenFragment)
         }
     }
 }

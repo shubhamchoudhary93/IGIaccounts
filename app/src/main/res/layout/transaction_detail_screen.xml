@@ -52,7 +52,7 @@
             android:id="@+id/transaction_list_screen_delete_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deltete" />
+            android:text="Delete" />
 
     </LinearLayout>
 </layout>

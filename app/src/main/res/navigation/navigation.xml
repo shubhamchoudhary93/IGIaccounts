@@ -15,7 +15,7 @@
             app:destination="@id/customerScreenFragment" />
         <action
             android:id="@+id/action_startScreenFragment_to_saleScreenFragment"
-            app:destination="@id/stockScreenFragment" />
+            app:destination="@id/saleScreenFragment" />
         <action
             android:id="@+id/action_startScreenFragment_to_stockScreenFragment"
             app:destination="@id/stockScreenFragment" />
@@ -232,6 +232,9 @@
         <action
             android:id="@+id/action_transactionDetailsScreenFragment_to_customerListOfTransactionScreenFragment"
             app:destination="@id/customerListOfTransactionScreenFragment" />
+        <action
+            android:id="@+id/action_transactionDetailsScreenFragment_to_transactionListScreenFragment"
+            app:destination="@id/transactionListScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionListScreenFragment"
