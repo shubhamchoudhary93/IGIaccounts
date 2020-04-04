@@ -15,7 +15,6 @@ class CustomerDetailsScreenFragment : Fragment() {
 
     private lateinit var binding: CustomerDetailScreenBinding
 
-
     private lateinit var viewModel: CustomerDetailsScreenViewModel
 
     override fun onCreateView(
