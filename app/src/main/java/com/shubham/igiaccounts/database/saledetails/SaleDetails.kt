@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "sale_details_data_table")
-class saleDetails(
+class SaleDetails(
     @PrimaryKey(autoGenerate = true)
     var saledetailsId: Long = 0L,
 
