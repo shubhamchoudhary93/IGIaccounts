@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.transaction.TransactionDatabase
 import com.shubham.igiaccounts.databinding.TransactionDetailScreenBinding
 
 class TransactionDetailsScreenFragment : Fragment() {
@@ -20,8 +22,22 @@ class TransactionDetailsScreenFragment : Fragment() {
             inflater,
             R.layout.transaction_detail_screen, container, false
         )
-        setListeners()
 
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = TransactionDatabase.getInstance(application).transactionDatabaseDao
+
+        val viewModelFactory = TransactionDetailsScreenViewModelFactory(dataSource, application)
+
+        val transactionDetailsScreenViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory
+            ).get(TransactionDetailsScreenViewModel::class.java)
+
+        binding.transactionDetailsScreenViewModel = transactionDetailsScreenViewModel
+
+        binding.lifecycleOwner = this
+        setListeners()
         return binding.root
     }
 
