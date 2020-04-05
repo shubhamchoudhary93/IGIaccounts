@@ -1,10 +1,10 @@
-package com.shubham.igiaccounts.customer.customerdetailsscreen
+package com.shubham.igiaccounts.customer.customerlistofsalescreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.shubham.igiaccounts.database.customer.CustomerDatabaseDao
 
-class CustomerDetailsScreenViewModel(
+class CustomerListOfSaleScreenViewModel(
     val database: CustomerDatabaseDao,
     application: Application
 ) : AndroidViewModel(application)

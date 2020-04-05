@@ -8,7 +8,7 @@ import androidx.room.Update
 import com.shubham.igiaccounts.database.sale.Sale
 
 @Dao
-interface SaleDatabaseDao {
+interface CustomerDatabaseDao {
     @Insert
     fun insert(sale: Sale)
 

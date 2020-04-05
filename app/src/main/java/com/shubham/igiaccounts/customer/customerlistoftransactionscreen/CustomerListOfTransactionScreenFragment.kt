@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.customer.CustomerDatabase
 import com.shubham.igiaccounts.databinding.CustomerListoftransactionScreenBinding
 
 class CustomerListOfTransactionScreenFragment : Fragment() {
@@ -20,6 +22,22 @@ class CustomerListOfTransactionScreenFragment : Fragment() {
             inflater,
             R.layout.customer_listoftransaction_screen, container, false
         )
+
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = CustomerDatabase.getInstance(application).customerDatabaseDao
+
+        val viewModelFactory =
+            CustomerListOfTransactionScreenViewModelFactory(dataSource, application)
+
+        val customerListOfTransactionScreenViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory
+            ).get(CustomerListOfTransactionScreenViewModel::class.java)
+
+        binding.customerListOfTransactionScreenViewModel = customerListOfTransactionScreenViewModel
+
+        binding.lifecycleOwner = this
         setListeners()
         return binding.root
     }
@@ -30,5 +48,5 @@ class CustomerListOfTransactionScreenFragment : Fragment() {
                 ?.navigate(R.id.action_customerListOfTransactionScreenFragment_to_transactionDetailsScreenFragment)
         }
     }
-
 }
+
