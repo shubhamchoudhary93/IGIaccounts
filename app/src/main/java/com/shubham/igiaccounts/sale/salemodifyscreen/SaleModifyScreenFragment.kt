@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.sale.SaleDatabase
 import com.shubham.igiaccounts.databinding.SaleModifyScreenBinding
 
 class SaleModifyScreenFragment : Fragment() {
@@ -20,6 +22,21 @@ class SaleModifyScreenFragment : Fragment() {
             inflater,
             R.layout.sale_modify_screen, container, false
         )
+
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = SaleDatabase.getInstance(application).saleDatabaseDao
+
+        val viewModelFactory = SaleModifyScreenViewModelFactory(dataSource, application)
+
+        val saleModifyScreenViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory
+            ).get(SaleModifyScreenViewModel::class.java)
+
+        binding.saleModifyScreenViewModel = saleModifyScreenViewModel
+
+        binding.lifecycleOwner = this
         setListeners()
         return binding.root
     }

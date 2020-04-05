@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="saleDetailsScreenViewModel"
+            type="com.shubham.igiaccounts.sale.saledetailsscreen.SaleDetailsScreenViewModel" />
     </data>
 
     <LinearLayout

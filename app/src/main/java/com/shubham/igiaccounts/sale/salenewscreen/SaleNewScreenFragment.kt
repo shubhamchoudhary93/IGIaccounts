@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.sale.SaleDatabase
 import com.shubham.igiaccounts.databinding.SaleNewScreenBinding
 
 class SaleNewScreenFragment : Fragment() {
@@ -20,6 +22,21 @@ class SaleNewScreenFragment : Fragment() {
             inflater,
             R.layout.sale_new_screen, container, false
         )
+
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = SaleDatabase.getInstance(application).saleDatabaseDao
+
+        val viewModelFactory = SaleNewScreenViewModelFactory(dataSource, application)
+
+        val saleNewScreenViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory
+            ).get(SaleNewScreenViewModel::class.java)
+
+        binding.saleNewScreenViewModel = saleNewScreenViewModel
+
+        binding.lifecycleOwner = this
         setListeners()
         return binding.root
     }
