@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.customer.CustomerDatabase
@@ -30,7 +31,7 @@ class CustomerNewScreenFragment : Fragment() {
         val viewModelFactory = CustomerNewScreenViewModelFactory(dataSource, application)
 
         val customerNewScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(CustomerNewScreenViewModel::class.java)
 
@@ -43,6 +44,25 @@ class CustomerNewScreenFragment : Fragment() {
 
     private fun setListeners() {
         binding.customerNewButton.setOnClickListener {
+            try {
+                if (binding.customerNewNameEdit.text.toString() != "") {
+                    binding.customerNewScreenViewModel?.insertCustomer(
+                        binding.customerNewNameEdit.text.toString(),
+                        binding.customerNewPhoneEdit.text.toString().toLong(),
+                        binding.customerNewAddressEdit.text.toString(),
+                        binding.customerNewOpeningbalanceEdit.text.toString().toFloat()
+                    )
+
+                } else {
+                    Toast.makeText(this.context, "Name is empty", Toast.LENGTH_LONG).show()
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println(e.message.toString())
+
+            }
             view?.findNavController()
                 ?.navigate(R.id.action_customerNewScreenFragment_to_customerDetailsScreenFragment)
         }

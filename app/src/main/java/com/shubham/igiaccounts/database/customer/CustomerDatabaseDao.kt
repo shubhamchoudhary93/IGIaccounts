@@ -5,26 +5,27 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.shubham.igiaccounts.database.sale.Sale
 
 @Dao
 interface CustomerDatabaseDao {
     @Insert
-    fun insert(sale: Sale)
+    fun insert(customer: Customer)
 
     @Update
-    fun update(sale: Sale)
+    fun update(customer: Customer)
 
-    @Query("SELECT * from sale_data_table WHERE saleId = :id")
-    fun get(id: Long): Sale?
+    @Query("SELECT * from customer_data_table WHERE customerId = :id")
+    fun get(id: Long): Customer?
 
-    @Query("DELETE FROM sale_data_table")
+    @Query("DELETE FROM customer_data_table")
     fun clear()
 
-    @Query("SELECT * FROM sale_data_table ORDER BY saleId DESC")
-    fun getAllSale(): LiveData<List<Sale>>
+    @Query("SELECT * FROM customer_data_table ORDER BY customerId DESC")
+    fun getAllCustomer(): LiveData<List<Customer>>
 
-    @Query("SELECT * FROM sale_data_table ORDER BY saleId DESC LIMIT 1")
-    fun getLastSale(): Sale?
+    @Query("SELECT * FROM customer_data_table ORDER BY customerId DESC LIMIT 1")
+    fun getLastCustomer(): Customer
 
+    @Query("SELECT * FROM customer_data_table WHERE customer_name LIKE :searchText")
+    fun searchCustomer(searchText: String): LiveData<List<Customer>>
 }

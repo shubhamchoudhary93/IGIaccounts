@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/transaction_list_screen_search_date_start_edit"
+            android:id="@+id/customer_list_screen_search_name__edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -25,12 +25,16 @@
             android:layout_height="wrap_content"
             android:text="Search" />
 
-        <TextView
-            android:id="@+id/customer_list_screen_list_text"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="List" />
+            android:layout_height="400dp">
 
+            <TextView
+                android:id="@+id/customer_list_screen_list_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="List" />
+        </ScrollView>
         <EditText
             android:id="@+id/customer_list_screen_customerid_edit"
             android:layout_width="match_parent"

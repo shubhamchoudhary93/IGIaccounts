@@ -9,21 +9,21 @@ import androidx.room.Update
 @Dao
 interface SaleDatabaseDao {
     @Insert
-    fun insert(customer: Customer)
+    fun insert(sale: Sale)
 
     @Update
-    fun update(customer: Customer)
+    fun update(sale: Sale)
 
-    @Query("SELECT * from customer_data_table WHERE customerId = :id")
-    fun get(id: Long): Customer?
+    @Query("SELECT * from sale_data_table WHERE saleId = :id")
+    fun get(id: Long): Sale?
 
-    @Query("DELETE FROM customer_data_table")
+    @Query("DELETE FROM sale_data_table")
     fun clear()
 
-    @Query("SELECT * FROM customer_data_table ORDER BY customerId DESC")
-    fun getAllNights(): LiveData<List<Customer>>
+    @Query("SELECT * FROM sale_data_table ORDER BY saleId DESC")
+    fun getAllNights(): LiveData<List<Sale>>
 
-    @Query("SELECT * FROM customer_data_table ORDER BY customerId DESC LIMIT 1")
-    fun getTonight(): Customer?
+    @Query("SELECT * FROM sale_data_table ORDER BY saleId DESC LIMIT 1")
+    fun getTonight(): Sale?
 
 }

@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.customer.CustomerDatabase
@@ -32,14 +33,30 @@ class CustomerDetailsScreenFragment : Fragment() {
         val viewModelFactory = CustomerDetailsScreenViewModelFactory(dataSource, application)
 
         val customerDetailsScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(CustomerDetailsScreenViewModel::class.java)
 
         binding.customerDetailsScreenViewModel = customerDetailsScreenViewModel
 
         binding.lifecycleOwner = this
+        customerDetailsScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
+            binding.customerListScreenIdText.text =
+                customerDetailsScreenViewModel.customer.customerId.toString()
+            binding.customerDetailScreenNameText.text =
+                customerDetailsScreenViewModel.customer.customerName
+            binding.customerListScreenPhoneText.text =
+                customerDetailsScreenViewModel.customer.customerPhone.toString()
+            binding.customerListScreenAddressText.text =
+                customerDetailsScreenViewModel.customer.customerAddress
+            binding.customerListScreenOpeningbalanceText.text =
+                customerDetailsScreenViewModel.customer.customerOpeningBalance.toString()
+            binding.customerListScreenCurrentbalanceText.text =
+                customerDetailsScreenViewModel.customer.customerCurrentBalance.toString()
+        })
+        customerDetailsScreenViewModel.fetchLastCustomer()
         setListeners()
+
         return binding.root
     }
 
@@ -61,5 +78,6 @@ class CustomerDetailsScreenFragment : Fragment() {
                 ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerListOfTransactionScreenFragment)
         }
     }
+
 
 }

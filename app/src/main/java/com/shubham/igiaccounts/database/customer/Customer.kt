@@ -10,7 +10,7 @@ class Customer(
     var customerId: Long = 0L,
 
     @ColumnInfo(name = "customer_name")
-    val customerName: String = "",
+    var customerName: String = "",
 
     @ColumnInfo(name = "customer_phone")
     var customerPhone: Long = 0L,

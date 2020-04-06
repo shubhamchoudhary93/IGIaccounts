@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.customer.CustomerDatabase
@@ -20,7 +21,7 @@ class CustomerListScreenFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.customer_new_screen, container, false
+            R.layout.customer_list_screen, container, false
         )
 
         val application = requireNotNull(this.activity).application
@@ -30,13 +31,19 @@ class CustomerListScreenFragment : Fragment() {
         val viewModelFactory = CustomerListScreenViewModelFactory(dataSource, application)
 
         val customerListScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(CustomerListScreenViewModel::class.java)
 
         binding.customerListScreenViewModel = customerListScreenViewModel
 
         binding.lifecycleOwner = this
+        customerListScreenViewModel.customersString.observe(
+            viewLifecycleOwner,
+            Observer { customersString ->
+                binding.customerListScreenListText.text = customersString.toString()
+            })
+
         setListeners()
         return binding.root
     }
@@ -46,6 +53,10 @@ class CustomerListScreenFragment : Fragment() {
             view?.findNavController()
                 ?.navigate(R.id.action_customerListScreenFragment_to_customerDetailsScreenFragment)
         }
+        binding.customerListScreenSearchNameButton.setOnClickListener {
+            binding.customerListScreenViewModel?.searchCustomer(binding.customerListScreenSearchNameEdit.text.toString())
+        }
+
     }
 
 }

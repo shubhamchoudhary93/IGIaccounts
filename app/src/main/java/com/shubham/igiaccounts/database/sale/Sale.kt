@@ -11,7 +11,7 @@ class Sale(
     var saleId: Long = 0L,
 
     @ColumnInfo(name = "sale_date")
-    val saleDate: Date = Date(),
+    val saleDate: String = Date().toString(),
 
     @ColumnInfo(name = "sale_sale_details_id")
     var saleSaleDetailsID: Long = 0L,
@@ -25,6 +25,6 @@ class Sale(
     @ColumnInfo(name = "sale_current_balance")
     var saleCash: Boolean = false,
 
-    @ColumnInfo(name = "sale_current_balance")
+    @ColumnInfo(name = "sale_customer_id")
     var saleCustomerID: Long = 0L
 )
