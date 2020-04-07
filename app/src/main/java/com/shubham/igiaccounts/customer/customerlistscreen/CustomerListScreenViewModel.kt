@@ -21,15 +21,15 @@ class CustomerListScreenViewModel(
 
     fun searchCustomer(searchText: String) {
         uiScope.launch {
-            withContext(Dispatchers.IO) {
-                var searchText1 = "%$searchText%"
-                println(searchText1)
-                val customers = database.searchCustomer(searchText1)
-                println("customers value")
-                println(customers.value)
-                println("customer string")
-                println(customersString.value)
-            }
+            var searchText1 = "%$searchText%"
+            println(searchText1)
+            searching(searchText1)
+        }
+    }
+
+    private suspend fun searching(searchText: String) {
+        withContext(Dispatchers.IO) {
+            customers = database.getAllCustomer()
         }
     }
 
