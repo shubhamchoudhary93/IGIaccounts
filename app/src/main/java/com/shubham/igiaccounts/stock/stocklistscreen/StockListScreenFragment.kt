@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.stock.StockDatabase
@@ -31,7 +31,7 @@ class StockListScreenFragment : Fragment() {
         val viewModelFactory = StockListScreenViewModelFactory(dataSource, application)
 
         val stockListScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(StockListScreenViewModel::class.java)
 

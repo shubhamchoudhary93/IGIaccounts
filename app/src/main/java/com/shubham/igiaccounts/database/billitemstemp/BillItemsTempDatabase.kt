@@ -24,7 +24,7 @@ abstract class BillItemsTempDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         BillItemsTempDatabase::class.java,
-                        "sleep_history_database"
+                        "billitemstemp_data_table"
                     )
 
                         .fallbackToDestructiveMigration()

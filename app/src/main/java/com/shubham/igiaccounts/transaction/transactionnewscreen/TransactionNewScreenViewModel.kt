@@ -7,17 +7,18 @@ import com.shubham.igiaccounts.database.transaction.TransactionDatabaseDao
 import kotlinx.coroutines.*
 
 class TransactionNewScreenViewModel(
-    val database: TransactionDatabaseDao,
+    val database1: TransactionDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun insertTransaction(name: String, amount: Float, date: String, detail: String) {
+    fun insertTransaction(customerId: Long, amount: Float, date: String, detail: String) {
         uiScope.launch {
             val transaction = Transaction()
-            transaction.transactionCustomerId = database.searchCustomerID(name)!!
+            transaction.transactionCustomerId = customerId
+
             transaction.transactionAmount = amount
             transaction.transactionDate = date
             transaction.transactionDetail = detail
@@ -27,7 +28,7 @@ class TransactionNewScreenViewModel(
 
     private suspend fun insert(transaction: Transaction) {
         withContext(Dispatchers.IO) {
-            database.insert(transaction)
+            database1.insert(transaction)
         }
     }
 

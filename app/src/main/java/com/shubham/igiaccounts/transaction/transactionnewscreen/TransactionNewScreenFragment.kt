@@ -47,7 +47,7 @@ class TransactionNewScreenFragment : Fragment() {
             try {
                 if (binding.transactionNewCustomerNameEdit.text.toString() != "") {
                     binding.transactionNewScreenViewModel?.insertTransaction(
-                        binding.transactionNewCustomerNameEdit.text.toString(),
+                        binding.transactionNewCustomerNameEdit.text.toString().toLong(),
                         binding.transactionNewAmountEdit.text.toString().toFloat(),
                         binding.transactionNewDateEdit.text.toString(),
                         binding.transactionNewDetailEdit.text.toString()

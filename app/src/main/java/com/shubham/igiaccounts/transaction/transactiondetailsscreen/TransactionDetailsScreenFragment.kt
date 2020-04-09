@@ -26,9 +26,9 @@ class TransactionDetailsScreenFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = TransactionDatabase.getInstance(application).transactionDatabaseDao
+        val dataSource1 = TransactionDatabase.getInstance(application).transactionDatabaseDao
 
-        val viewModelFactory = TransactionDetailsScreenViewModelFactory(dataSource, application)
+        val viewModelFactory = TransactionDetailsScreenViewModelFactory(dataSource1, application)
 
         val transactionDetailsScreenViewModel =
             ViewModelProvider(

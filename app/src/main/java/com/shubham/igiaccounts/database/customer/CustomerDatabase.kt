@@ -23,7 +23,7 @@ abstract class CustomerDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         CustomerDatabase::class.java,
-                        "sleep_history_database"
+                        "customer_data_table"
                     )
 
                         .fallbackToDestructiveMigration()

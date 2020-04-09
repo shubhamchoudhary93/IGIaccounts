@@ -32,6 +32,4 @@ interface TransactionDatabaseDao {
     @Query("SELECT * FROM transaction_data_table WHERE transaction_date LIKE :searchText")
     fun searchTransaction(searchText: String): LiveData<List<Transaction>>
 
-    @Query("SELECT customerId FROM customer_data_table WHERE customer_name LIKE :searchText")
-    fun searchCustomerID(searchText: String): Long?
 }

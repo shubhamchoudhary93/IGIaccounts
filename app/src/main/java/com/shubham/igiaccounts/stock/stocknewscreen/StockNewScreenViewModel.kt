@@ -14,7 +14,7 @@ class StockNewScreenViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun insertStock(name: String, category: String, percentage: Float, rate: Float) {
+    fun insertStock(name: String, category: String, rate: Float, percentage: Float) {
         uiScope.launch {
             val stock = Stock()
             stock.stockName = name
