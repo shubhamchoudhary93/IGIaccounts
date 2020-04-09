@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.stock.Stock
 import com.shubham.igiaccounts.database.stock.StockDatabase
 import com.shubham.igiaccounts.databinding.StockModifyScreenBinding
 
 class StockModifyScreenFragment : Fragment() {
+
     private lateinit var binding: StockModifyScreenBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,21 +34,45 @@ class StockModifyScreenFragment : Fragment() {
         val viewModelFactory = StockModifyScreenViewModelFactory(dataSource, application)
 
         val stockModifyScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(StockModifyScreenViewModel::class.java)
 
         binding.stockModifyScreenViewModel = stockModifyScreenViewModel
 
         binding.lifecycleOwner = this
-        setListeners()
+        stockModifyScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
+            binding.stockModifyScreenNameEdit.setText(stockModifyScreenViewModel.stock.stockName)
+            binding.stockModifyScreenCategoryEdit.setText(stockModifyScreenViewModel.stock.stockCategoryName)
+            binding.stockModifyScreenPercentageEdit.setText(stockModifyScreenViewModel.stock.stockPercentage.toString())
+            binding.stockModifyScreenRateEdit.setText(stockModifyScreenViewModel.stock.stockRate.toString())
+
+        })
+        val args = StockModifyScreenFragmentArgs.fromBundle(arguments!!)
+        println(args.stockid)
+        stockModifyScreenViewModel.fetchStock(args.stockid)
+        setListeners(stockModifyScreenViewModel.stock.stockId)
         return binding.root
     }
 
-    private fun setListeners() {
+    private fun setListeners(stockId: Long) {
         binding.stockModifyScreenModifyButton.setOnClickListener {
+            var stock = Stock()
+            stock.stockName =
+                binding.stockModifyScreenNameEdit.text.toString()
+            stock.stockCategoryName =
+                binding.stockModifyScreenCategoryEdit.text.toString()
+            stock.stockPercentage =
+                binding.stockModifyScreenPercentageEdit.text.toString().toFloat()
+            stock.stockRate =
+                binding.stockModifyScreenRateEdit.text.toString().toFloat()
+            binding.stockModifyScreenViewModel?.modifyStock(stock)
             view?.findNavController()
-                ?.navigate(R.id.action_stockModifyScreenFragment_to_stockDetailsScreenFragment2)
+                ?.navigate(
+                    StockModifyScreenFragmentDirections.actionStockModifyScreenFragmentToStockDetailsScreenFragment2(
+                        stockId
+                    )
+                )
         }
 
     }

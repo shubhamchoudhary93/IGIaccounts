@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.transaction.TransactionDatabase
@@ -30,13 +31,30 @@ class TransactionDetailsScreenFragment : Fragment() {
         val viewModelFactory = TransactionDetailsScreenViewModelFactory(dataSource, application)
 
         val transactionDetailsScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(TransactionDetailsScreenViewModel::class.java)
 
         binding.transactionDetailsScreenViewModel = transactionDetailsScreenViewModel
 
         binding.lifecycleOwner = this
+        transactionDetailsScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
+            binding.transactionDetailScreenReceiptText.text =
+                transactionDetailsScreenViewModel.transaction.receipt.toString()
+            binding.transactionListScreenIdText.text =
+                transactionDetailsScreenViewModel.transaction.transactionId.toString()
+            binding.transactionListScreenCustomernameText.text =
+                transactionDetailsScreenViewModel.transaction.transactionCustomerId.toString()
+            binding.transactionListScreenAmountText.text =
+                transactionDetailsScreenViewModel.transaction.transactionAmount.toString()
+            binding.transactionListScreenDateText.text =
+                transactionDetailsScreenViewModel.transaction.transactionDate.toString()
+            binding.transactionListScreenDetailsText.text =
+                transactionDetailsScreenViewModel.transaction.transactionDetail.toString()
+        })
+        val args = TransactionDetailsScreenFragmentArgs.fromBundle(arguments!!)
+        println(args.transactionid)
+        transactionDetailsScreenViewModel.fetchTransaction(args.transactionid)
         setListeners()
         return binding.root
     }
@@ -44,11 +62,16 @@ class TransactionDetailsScreenFragment : Fragment() {
     private fun setListeners() {
         binding.transactionListScreenModifyButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_transactionDetailsScreenFragment_to_transactionModifyScreenFragment)
+                ?.navigate(
+                    TransactionDetailsScreenFragmentDirections.actionTransactionDetailsScreenFragmentToTransactionModifyScreenFragment(
+                        binding.transactionListScreenIdText.text.toString().toLong()
+                    )
+                )
         }
         binding.transactionListScreenDeleteButton.setOnClickListener {
+            binding.transactionDetailsScreenViewModel?.deleteTransaction(binding.transactionListScreenIdText.text.toString().toLong())
             view?.findNavController()
-                ?.navigate(R.id.action_transactionDetailsScreenFragment_to_transactionListScreenFragment)
+                ?.navigate(TransactionDetailsScreenFragmentDirections.actionTransactionDetailsScreenFragmentToTransactionListScreenFragment())
         }
     }
 }

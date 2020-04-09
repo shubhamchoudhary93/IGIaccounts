@@ -10,7 +10,7 @@ class Stock(
     var stockId: Long = 0L,
 
     @ColumnInfo(name = "stock_name")
-    val stockName: String = "",
+    var stockName: String = "",
 
     @ColumnInfo(name = "stock_category_name")
     var stockCategoryName: String = "",

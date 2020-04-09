@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.transaction.TransactionDatabase
@@ -30,7 +31,7 @@ class TransactionNewScreenFragment : Fragment() {
         val viewModelFactory = TransactionNewScreenViewModelFactory(dataSource, application)
 
         val transactionNewScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(TransactionNewScreenViewModel::class.java)
 
@@ -43,8 +44,31 @@ class TransactionNewScreenFragment : Fragment() {
 
     private fun setListeners() {
         binding.transactionNewButton.setOnClickListener {
-            view?.findNavController()
-                ?.navigate(R.id.action_transactionNewScreenFragment_to_transactionDetailsScreenFragment)
+            try {
+                if (binding.transactionNewCustomerNameEdit.text.toString() != "") {
+                    binding.transactionNewScreenViewModel?.insertTransaction(
+                        binding.transactionNewCustomerNameEdit.text.toString(),
+                        binding.transactionNewAmountEdit.text.toString().toFloat(),
+                        binding.transactionNewDateEdit.text.toString(),
+                        binding.transactionNewDetailEdit.text.toString()
+                    )
+
+                    view?.findNavController()
+                        ?.navigate(
+                            TransactionNewScreenFragmentDirections.actionTransactionNewScreenFragmentToTransactionDetailsScreenFragment(
+                                0L
+                            )
+                        )
+                } else {
+                    Toast.makeText(this.context, "Name is empty", Toast.LENGTH_LONG).show()
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println(e.message.toString())
+
+            }
         }
 
     }

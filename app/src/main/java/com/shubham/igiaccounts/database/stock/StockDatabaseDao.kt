@@ -24,7 +24,7 @@ interface StockDatabaseDao {
     fun getAllStocks(): LiveData<List<Stock>>
 
     @Query("SELECT * FROM Stock_data_table ORDER BY StockId DESC LIMIT 1")
-    fun getLastStock(): Stock?
+    fun getLastStock(): Stock
 
     @Query("DELETE FROM Stock_data_table WHERE StockId = :id")
     fun delete(id: Long)

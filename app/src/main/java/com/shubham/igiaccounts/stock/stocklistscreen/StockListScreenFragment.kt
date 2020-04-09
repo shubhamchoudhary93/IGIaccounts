@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
@@ -37,14 +38,26 @@ class StockListScreenFragment : Fragment() {
         binding.stockListScreenViewModel = stockListScreenViewModel
 
         binding.lifecycleOwner = this
+        stockListScreenViewModel.stockString.observe(
+            viewLifecycleOwner,
+            Observer { stockString ->
+                binding.stockListScreenListText.text = stockString.toString()
+            })
+
         setListeners()
         return binding.root
     }
 
     private fun setListeners() {
         binding.stockListScreenShowDetailsButton.setOnClickListener {
+            var args1 =
+                if (binding.stockListScreenStockIdDetailsEdit.text.toString() == "") "1" else binding.stockListScreenStockIdDetailsEdit.text.toString()
             view?.findNavController()
-                ?.navigate(R.id.action_stockListScreenFragment_to_stockDetailsScreenFragment2)
+                ?.navigate(
+                    StockListScreenFragmentDirections.actionStockListScreenFragmentToStockDetailsScreenFragment2(
+                        args1.toLong()
+                    )
+                )
         }
 
     }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.customer.Customer
@@ -34,7 +34,7 @@ class CustomerModifyScreenFragment : Fragment() {
         val viewModelFactory = CustomerModifyScreenViewModelFactory(dataSource, application)
 
         val customerModifyScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(CustomerModifyScreenViewModel::class.java)
 
@@ -57,7 +57,7 @@ class CustomerModifyScreenFragment : Fragment() {
 
     private fun setListeners(customerId: Long) {
         binding.customerModifyScreenModifyButton.setOnClickListener {
-            val customer = Customer()
+            var customer = Customer()
             customer.customerName =
                 binding.customerModifyScreenNameEdit.text.toString()
             customer.customerPhone =

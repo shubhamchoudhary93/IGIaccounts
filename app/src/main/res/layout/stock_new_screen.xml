@@ -20,18 +20,18 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/stock_new_screen_phone_edit"
+            android:id="@+id/stock_new_screen_category_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone" />
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/stock_new_screen_address_edit"
+            android:id="@+id/stock_new_screen_rate_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPostalAddress" />
+            android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/stock_new_screen_percentage_edit"

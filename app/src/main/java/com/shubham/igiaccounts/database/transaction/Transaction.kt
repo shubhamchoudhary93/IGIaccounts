@@ -11,7 +11,7 @@ class Transaction(
     var transactionId: Long = 0L,
 
     @ColumnInfo(name = "transaction_receipt")
-    val receipt: Boolean = true,
+    var receipt: Boolean = true,
 
     @ColumnInfo(name = "transaction_customerId")
     var transactionCustomerId: Long = 0L,

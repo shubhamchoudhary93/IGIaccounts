@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
 import com.shubham.igiaccounts.database.stock.StockDatabase
@@ -30,7 +31,7 @@ class StockNewScreenFragment : Fragment() {
         val viewModelFactory = StockNewScreenViewModelFactory(dataSource, application)
 
         val stockNewScreenViewModel =
-            ViewModelProviders.of(
+            ViewModelProvider(
                 this, viewModelFactory
             ).get(StockNewScreenViewModel::class.java)
 
@@ -43,8 +44,31 @@ class StockNewScreenFragment : Fragment() {
 
     private fun setListeners() {
         binding.stockNewScreenAddButton.setOnClickListener {
-            view?.findNavController()
-                ?.navigate(R.id.action_stockNewScreenFragment_to_stockDetailsScreenFragment2)
+            try {
+                if (binding.stockNewScreenNameEdit.text.toString() != "") {
+                    binding.stockNewScreenViewModel?.insertStock(
+                        binding.stockNewScreenNameEdit.text.toString(),
+                        binding.stockNewScreenCategoryEdit.text.toString(),
+                        binding.stockNewScreenRateEdit.text.toString().toFloat(),
+                        binding.stockNewScreenPercentageEdit.text.toString().toFloat()
+                    )
+
+                    view?.findNavController()
+                        ?.navigate(
+                            StockNewScreenFragmentDirections.actionStockNewScreenFragmentToStockDetailsScreenFragment2(
+                                0L
+                            )
+                        )
+                } else {
+                    Toast.makeText(this.context, "Name is empty", Toast.LENGTH_LONG).show()
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println(e.message.toString())
+
+            }
         }
 
     }

@@ -27,9 +27,11 @@ interface TransactionDatabaseDao {
     fun getAllTransactions(): LiveData<List<Transaction>>
 
     @Query("SELECT * FROM transaction_data_table ORDER BY transactionId DESC LIMIT 1")
-    fun getLastTransaction(): Transaction?
+    fun getLastTransaction(): Transaction
 
-    @Query("SELECT * FROM transaction_data_table WHERE transactionDate LIKE :searchText")
+    @Query("SELECT * FROM transaction_data_table WHERE transaction_date LIKE :searchText")
     fun searchTransaction(searchText: String): LiveData<List<Transaction>>
 
+    @Query("SELECT customerId FROM customer_data_table WHERE customer_name LIKE :searchText")
+    fun searchCustomerID(searchText: String): Long?
 }
