@@ -17,6 +17,9 @@ interface TransactionDatabaseDao {
     @Query("SELECT * from transaction_data_table WHERE transactionId = :id")
     fun get(id: Long): Transaction?
 
+    @Query("DELETE FROM transaction_data_table WHERE transactionId = :id")
+    fun delete(id: Long)
+
     @Query("DELETE FROM transaction_data_table")
     fun clear()
 
@@ -25,5 +28,8 @@ interface TransactionDatabaseDao {
 
     @Query("SELECT * FROM transaction_data_table ORDER BY transactionId DESC LIMIT 1")
     fun getLastTransaction(): Transaction?
+
+    @Query("SELECT * FROM transaction_data_table WHERE transactionDate LIKE :searchText")
+    fun searchTransaction(searchText: String): LiveData<List<Transaction>>
 
 }

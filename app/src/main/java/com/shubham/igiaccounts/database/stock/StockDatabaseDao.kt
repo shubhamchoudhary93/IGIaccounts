@@ -26,4 +26,11 @@ interface StockDatabaseDao {
     @Query("SELECT * FROM Stock_data_table ORDER BY StockId DESC LIMIT 1")
     fun getLastStock(): Stock?
 
+    @Query("DELETE FROM Stock_data_table WHERE StockId = :id")
+    fun delete(id: Long)
+
+    @Query("SELECT * FROM Stock_data_table WHERE StockId LIKE :searchText")
+    fun searchStock(searchText: String): LiveData<List<Stock>>
+
+
 }

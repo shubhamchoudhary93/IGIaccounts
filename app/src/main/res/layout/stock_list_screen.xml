@@ -12,18 +12,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/stock_list_screen_search_name_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+        <!--        <EditText-->
+        <!--            android:id="@+id/stock_list_screen_search_name_edit"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:ems="10"-->
+        <!--            android:inputType="textPersonName" />-->
 
-        <Button
-            android:id="@+id/stock_list_screen_search_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search" />
+        <!--        <Button-->
+        <!--            android:id="@+id/stock_list_screen_search_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Search" />-->
 
         <TextView
             android:id="@+id/stock_list_screen_list_text"

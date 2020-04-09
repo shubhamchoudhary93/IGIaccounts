@@ -40,7 +40,7 @@
             app:destination="@id/customerModifyScreenFragment" />
         <argument
             android:name="customerId"
-            android:defaultValue="1L"
+            android:defaultValue="0L"
             app:argType="long" />
         <action
             android:id="@+id/action_customerDetailsScreenFragment_to_customerListScreenFragment"
@@ -54,6 +54,10 @@
         <action
             android:id="@+id/action_customerListOfSaleScreenFragment_to_saleDetailsScreenFragment"
             app:destination="@id/saleDetailsScreenFragment" />
+        <argument
+            android:name="customerId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/customerListScreenFragment"
@@ -72,6 +76,10 @@
         <action
             android:id="@+id/action_customerListOfTransactionScreenFragment_to_transactionDetailsScreenFragment"
             app:destination="@id/transactionDetailsScreenFragment" />
+        <argument
+            android:name="customerId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/customerModifyScreenFragment"
@@ -83,7 +91,7 @@
             app:destination="@id/customerDetailsScreenFragment" />
         <argument
             android:name="customerId"
-            android:defaultValue="1L"
+            android:defaultValue="0L"
             app:argType="long" />
     </fragment>
     <fragment
@@ -118,6 +126,10 @@
         <action
             android:id="@+id/action_saleDetailsScreenFragment_to_saleListScreenFragment"
             app:destination="@id/saleListScreenFragment" />
+        <argument
+            android:name="saleId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/saleListScreenFragment"
@@ -142,6 +154,10 @@
         <action
             android:id="@+id/action_saleModifyScreenFragment_to_saleItemModifyScreenFragment"
             app:destination="@id/saleItemModifyScreenFragment" />
+        <argument
+            android:name="saleId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/saleNewItemAddScreenFragment"
@@ -151,6 +167,14 @@
         <action
             android:id="@+id/action_saleNewItemAddScreenFragment_to_saleNewScreenFragment"
             app:destination="@id/saleNewScreenFragment" />
+        <argument
+            android:name="saletempId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="saleid"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/saleNewScreenFragment"
@@ -163,12 +187,29 @@
         <action
             android:id="@+id/action_saleNewScreenFragment_to_salePreviewScreenFragment"
             app:destination="@id/salePreviewScreenFragment" />
+        <argument
+            android:name="saletempId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="saleId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/salePreviewScreenFragment"
         android:name="com.shubham.igiaccounts.sale.salepreviewscreen.SalePreviewScreenFragment"
         android:label="SalePreviewScreenFragment"
-        tools:layout="@layout/sale_preview_screen" />
+        tools:layout="@layout/sale_preview_screen">
+        <argument
+            android:name="saletempId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="saleId"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/saleScreenFragment"
         android:name="com.shubham.igiaccounts.sale.salescreen.SaleScreenFragment"
@@ -182,7 +223,7 @@
             app:destination="@id/saleListScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/stockDetailsScreenFragment2"
+        android:id="@+id/stockDetailsScreenFragment"
         android:name="com.shubham.igiaccounts.stock.stockdetailsscreen.StockDetailsScreenFragment"
         android:label="StockDetailsScreenFragment"
         tools:layout="@layout/stock_detail_screen">
@@ -192,6 +233,10 @@
         <action
             android:id="@+id/action_stockDetailsScreenFragment2_to_stockListScreenFragment"
             app:destination="@id/stockListScreenFragment" />
+        <argument
+            android:name="stockid"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/stockListScreenFragment"
@@ -200,7 +245,7 @@
         tools:layout="@layout/stock_list_screen">
         <action
             android:id="@+id/action_stockListScreenFragment_to_stockDetailsScreenFragment2"
-            app:destination="@id/stockDetailsScreenFragment2" />
+            app:destination="@id/stockDetailsScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/stockModifyScreenFragment"
@@ -209,7 +254,11 @@
         tools:layout="@layout/stock_modify_screen">
         <action
             android:id="@+id/action_stockModifyScreenFragment_to_stockDetailsScreenFragment2"
-            app:destination="@id/stockDetailsScreenFragment2" />
+            app:destination="@id/stockDetailsScreenFragment" />
+        <argument
+            android:name="stockid"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/stockNewScreenFragment"
@@ -218,7 +267,7 @@
         tools:layout="@layout/stock_new_screen">
         <action
             android:id="@+id/action_stockNewScreenFragment_to_stockDetailsScreenFragment2"
-            app:destination="@id/stockDetailsScreenFragment2" />
+            app:destination="@id/stockDetailsScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/stockScreenFragment"
@@ -246,6 +295,10 @@
         <action
             android:id="@+id/action_transactionDetailsScreenFragment_to_transactionListScreenFragment"
             app:destination="@id/transactionListScreenFragment" />
+        <argument
+            android:name="transactionid"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/transactionListScreenFragment"
@@ -255,6 +308,10 @@
         <action
             android:id="@+id/action_transactionListScreenFragment_to_transactionDetailsScreenFragment"
             app:destination="@id/transactionDetailsScreenFragment" />
+        <argument
+            android:name="transactionId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/transactionModifyScreenFragment"
@@ -264,6 +321,10 @@
         <action
             android:id="@+id/action_transactionModifyScreenFragment_to_transactionDetailsScreenFragment"
             app:destination="@id/transactionDetailsScreenFragment" />
+        <argument
+            android:name="transactionId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/transactionNewScreenFragment"
@@ -294,5 +355,9 @@
         <action
             android:id="@+id/action_saleItemModifyScreenFragment_to_saleModifyScreenFragment"
             app:destination="@id/saleModifyScreenFragment" />
+        <argument
+            android:name="transactionId"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
 </navigation>
