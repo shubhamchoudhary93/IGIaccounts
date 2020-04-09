@@ -16,7 +16,7 @@ import com.shubham.igiaccounts.databinding.CustomerDetailScreenBinding
 class CustomerDetailsScreenFragment : Fragment() {
 
     private lateinit var binding: CustomerDetailScreenBinding
-
+    private val args = CustomerDetailsScreenFragmentArgs.fromBundle(arguments!!)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,7 +54,8 @@ class CustomerDetailsScreenFragment : Fragment() {
             binding.customerListScreenCurrentbalanceText.text =
                 customerDetailsScreenViewModel.customer.customerCurrentBalance.toString()
         })
-        customerDetailsScreenViewModel.fetchLastCustomer()
+        println(args.customerId)
+        customerDetailsScreenViewModel.fetchCustomer(args.customerId)
         setListeners()
 
         return binding.root

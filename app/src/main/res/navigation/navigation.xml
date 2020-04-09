@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_customerDetailsScreenFragment_to_customerModifyScreenFragment"
             app:destination="@id/customerModifyScreenFragment" />
+        <argument
+            android:name="customerId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/customerListOfSaleScreenFragment"

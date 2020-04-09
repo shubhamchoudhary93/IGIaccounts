@@ -22,6 +22,15 @@ class CustomerDetailsScreenViewModel(
         liveC.value = false
     }
 
+    fun fetchCustomer(customerId: Long) {
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                customer = this@CustomerDetailsScreenViewModel.database.get(customerId)!!
+            }
+            liveC.value = true
+        }
+    }
+
     fun fetchLastCustomer() {
         uiScope.launch {
             withContext(Dispatchers.IO) {

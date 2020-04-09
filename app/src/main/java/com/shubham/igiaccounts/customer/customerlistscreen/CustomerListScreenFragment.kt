@@ -51,11 +51,17 @@ class CustomerListScreenFragment : Fragment() {
     private fun setListeners() {
         binding.customerListScreenShowDetailsButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_customerListScreenFragment_to_customerDetailsScreenFragment)
+                ?.navigate(
+                    CustomerListScreenFragmentDirections.actionCustomerListScreenFragmentToCustomerDetailsScreenFragment(
+                        binding.customerListScreenCustomeridEdit.text.toString().toLong()
+                    )
+                )
         }
-        binding.customerListScreenSearchNameButton.setOnClickListener {
-            binding.customerListScreenViewModel?.searchCustomer(binding.customerListScreenSearchNameEdit.text.toString())
-        }
+
+//        R.id.action_customerListScreenFragment_to_customerDetailsScreenFragment
+//        binding.customerListScreenSearchNameButton.setOnClickListener {
+//            binding.customerListScreenViewModel?.searchCustomer(binding.customerListScreenSearchNameEdit.text.toString())
+//        }
 
     }
 
