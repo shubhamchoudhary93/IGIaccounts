@@ -25,18 +25,37 @@ class CustomerDetailsScreenViewModel(
     fun fetchCustomer(customerId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                customer = this@CustomerDetailsScreenViewModel.database.get(customerId)!!
+                customer = if (customerId == 0L) {
+                    try {
+                        database.getLastCustomer()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Customer()
+                    }
+                } else {
+                    try {
+                        database.get(customerId)!!
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Customer()
+                    }
+                }
+
             }
             liveC.value = true
         }
     }
 
-    fun fetchLastCustomer() {
+    fun deleteCustomer(customerId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                customer = this@CustomerDetailsScreenViewModel.database.getLastCustomer()
+                try {
+                    database.delete(customerId)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+
+                }
             }
-            liveC.value = true
         }
     }
 

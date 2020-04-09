@@ -16,7 +16,7 @@ import com.shubham.igiaccounts.databinding.CustomerDetailScreenBinding
 class CustomerDetailsScreenFragment : Fragment() {
 
     private lateinit var binding: CustomerDetailScreenBinding
-    private val args = CustomerDetailsScreenFragmentArgs.fromBundle(arguments!!)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,19 +41,20 @@ class CustomerDetailsScreenFragment : Fragment() {
 
         binding.lifecycleOwner = this
         customerDetailsScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
-            binding.customerListScreenIdText.text =
+            binding.customerDetailScreenIdText.text =
                 customerDetailsScreenViewModel.customer.customerId.toString()
             binding.customerDetailScreenNameText.text =
                 customerDetailsScreenViewModel.customer.customerName
-            binding.customerListScreenPhoneText.text =
+            binding.customerDetailScreenPhoneText.text =
                 customerDetailsScreenViewModel.customer.customerPhone.toString()
-            binding.customerListScreenAddressText.text =
+            binding.customerDetailScreenAddressText.text =
                 customerDetailsScreenViewModel.customer.customerAddress
-            binding.customerListScreenOpeningbalanceText.text =
+            binding.customerDetailScreenOpeningbalanceText.text =
                 customerDetailsScreenViewModel.customer.customerOpeningBalance.toString()
-            binding.customerListScreenCurrentbalanceText.text =
+            binding.customerDetailScreenCurrentbalanceText.text =
                 customerDetailsScreenViewModel.customer.customerCurrentBalance.toString()
         })
+        val args = CustomerDetailsScreenFragmentArgs.fromBundle(arguments!!)
         println(args.customerId)
         customerDetailsScreenViewModel.fetchCustomer(args.customerId)
         setListeners()
@@ -62,21 +63,26 @@ class CustomerDetailsScreenFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.customerListScreenModifyButton.setOnClickListener {
+        binding.customerDetailScreenModifyButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerModifyScreenFragment)
+                ?.navigate(
+                    CustomerDetailsScreenFragmentDirections.actionCustomerDetailsScreenFragmentToCustomerModifyScreenFragment(
+                        binding.customerDetailScreenIdText.text.toString().toLong()
+                    )
+                )
         }
-        binding.customerListScreenDeleteButton.setOnClickListener {
+        binding.customerDetailScreenDeleteButton.setOnClickListener {
+            binding.customerDetailsScreenViewModel?.deleteCustomer(binding.customerDetailScreenIdText.text.toString().toLong())
             view?.findNavController()
-                ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerModifyScreenFragment)
+                ?.navigate(CustomerDetailsScreenFragmentDirections.actionCustomerDetailsScreenFragmentToCustomerListScreenFragment())
         }
-        binding.customerListScreenListbillsButton.setOnClickListener {
+        binding.customerDetailScreenDetailbillsButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerListOfSaleScreenFragment)
+                ?.navigate(CustomerDetailsScreenFragmentDirections.actionCustomerDetailsScreenFragmentToCustomerListOfSaleScreenFragment())
         }
-        binding.customerListScreenListtransactionButton.setOnClickListener {
+        binding.customerDetailScreenDetailtransactionButton.setOnClickListener {
             view?.findNavController()
-                ?.navigate(R.id.action_customerDetailsScreenFragment_to_customerListOfTransactionScreenFragment)
+                ?.navigate(CustomerDetailsScreenFragmentDirections.actionCustomerDetailsScreenFragmentToCustomerListOfTransactionScreenFragment())
         }
     }
 

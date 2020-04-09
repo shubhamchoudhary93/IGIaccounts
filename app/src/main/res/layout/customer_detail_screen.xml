@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/customer_list_screen_id_text"
+            android:id="@+id/customer_detail_screen_id_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ID" />
@@ -25,49 +25,49 @@
             android:text="Name" />
 
         <TextView
-            android:id="@+id/customer_list_screen_phone_text"
+            android:id="@+id/customer_detail_screen_phone_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone" />
 
         <TextView
-            android:id="@+id/customer_list_screen_address_text"
+            android:id="@+id/customer_detail_screen_address_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Address" />
 
         <TextView
-            android:id="@+id/customer_list_screen_openingbalance_text"
+            android:id="@+id/customer_detail_screen_openingbalance_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Opening Balance" />
 
         <TextView
-            android:id="@+id/customer_list_screen_currentbalance_text"
+            android:id="@+id/customer_detail_screen_currentbalance_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Current Balance" />
 
         <Button
-            android:id="@+id/customer_list_screen_modify_button"
+            android:id="@+id/customer_detail_screen_modify_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Modify" />
 
         <Button
-            android:id="@+id/customer_list_screen_delete_button"
+            android:id="@+id/customer_detail_screen_delete_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Deltete" />
 
         <Button
-            android:id="@+id/customer_list_screen_listtransaction_button"
+            android:id="@+id/customer_detail_screen_detailtransaction_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="List of transaction " />
 
         <Button
-            android:id="@+id/customer_list_screen_listbills_button"
+            android:id="@+id/customer_detail_screen_detailbills_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="list of bills" />

@@ -50,10 +50,12 @@ class CustomerListScreenFragment : Fragment() {
 
     private fun setListeners() {
         binding.customerListScreenShowDetailsButton.setOnClickListener {
+            var args1 =
+                if (binding.customerListScreenCustomeridEdit.text.toString() == "") "1" else binding.customerListScreenCustomeridEdit.text.toString()
             view?.findNavController()
                 ?.navigate(
                     CustomerListScreenFragmentDirections.actionCustomerListScreenFragmentToCustomerDetailsScreenFragment(
-                        binding.customerListScreenCustomeridEdit.text.toString().toLong()
+                        args1.toLong()
                     )
                 )
         }

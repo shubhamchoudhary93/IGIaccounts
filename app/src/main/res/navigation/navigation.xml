@@ -40,7 +40,11 @@
             app:destination="@id/customerModifyScreenFragment" />
         <argument
             android:name="customerId"
+            android:defaultValue="1L"
             app:argType="long" />
+        <action
+            android:id="@+id/action_customerDetailsScreenFragment_to_customerListScreenFragment"
+            app:destination="@id/customerListScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerListOfSaleScreenFragment"
@@ -77,6 +81,10 @@
         <action
             android:id="@+id/action_customerModifyScreenFragment_to_customerDetailsScreenFragment"
             app:destination="@id/customerDetailsScreenFragment" />
+        <argument
+            android:name="customerId"
+            android:defaultValue="1L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/customerNewScreenFragment"

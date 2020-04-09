@@ -17,6 +17,9 @@ interface CustomerDatabaseDao {
     @Query("SELECT * from customer_data_table WHERE customerId = :id")
     fun get(id: Long): Customer?
 
+    @Query("DELETE FROM customer_data_table WHERE customerId = :id")
+    fun delete(id: Long)
+
     @Query("DELETE FROM customer_data_table")
     fun clear()
 

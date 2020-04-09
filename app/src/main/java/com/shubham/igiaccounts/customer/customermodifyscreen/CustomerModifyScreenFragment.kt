@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
+import com.shubham.igiaccounts.database.customer.Customer
 import com.shubham.igiaccounts.database.customer.CustomerDatabase
 import com.shubham.igiaccounts.databinding.CustomerModifyScreenBinding
 
 class CustomerModifyScreenFragment : Fragment() {
+
     private lateinit var binding: CustomerModifyScreenBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,14 +41,38 @@ class CustomerModifyScreenFragment : Fragment() {
         binding.customerModifyScreenViewModel = customerModifyScreenViewModel
 
         binding.lifecycleOwner = this
-        setListeners()
+        customerModifyScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
+            binding.customerModifyScreenNameEdit.setText(customerModifyScreenViewModel.customer.customerName)
+            binding.customerModifyScreenPhoneEdit.setText(customerModifyScreenViewModel.customer.customerPhone.toString())
+            binding.customerModifyScreenAddressEdit.setText(customerModifyScreenViewModel.customer.customerAddress)
+            binding.customerModifyScreenOpeningbalanceEdit.setText(customerModifyScreenViewModel.customer.customerOpeningBalance.toString())
+
+        })
+        val args = CustomerModifyScreenFragmentArgs.fromBundle(arguments!!)
+        println(args.customerId)
+        customerModifyScreenViewModel.fetchCustomer(args.customerId)
+        setListeners(customerModifyScreenViewModel.customer.customerId)
         return binding.root
     }
 
-    private fun setListeners() {
+    private fun setListeners(customerId: Long) {
         binding.customerModifyScreenModifyButton.setOnClickListener {
+            val customer = Customer()
+            customer.customerName =
+                binding.customerModifyScreenNameEdit.text.toString()
+            customer.customerPhone =
+                binding.customerModifyScreenPhoneEdit.text.toString().toLong()
+            customer.customerAddress =
+                binding.customerModifyScreenAddressEdit.text.toString()
+            customer.customerOpeningBalance =
+                binding.customerModifyScreenOpeningbalanceEdit.text.toString().toFloat()
+            binding.customerModifyScreenViewModel?.modifyCustomer(customer)
             view?.findNavController()
-                ?.navigate(R.id.action_customerModifyScreenFragment_to_customerDetailsScreenFragment)
+                ?.navigate(
+                    CustomerModifyScreenFragmentDirections.actionCustomerModifyScreenFragmentToCustomerDetailsScreenFragment(
+                        customerId
+                    )
+                )
         }
     }
 

@@ -53,6 +53,12 @@ class CustomerNewScreenFragment : Fragment() {
                         binding.customerNewOpeningbalanceEdit.text.toString().toFloat()
                     )
 
+                    view?.findNavController()
+                        ?.navigate(
+                            CustomerNewScreenFragmentDirections.actionCustomerNewScreenFragmentToCustomerDetailsScreenFragment(
+                                0L
+                            )
+                        )
                 } else {
                     Toast.makeText(this.context, "Name is empty", Toast.LENGTH_LONG).show()
                 }
@@ -63,8 +69,7 @@ class CustomerNewScreenFragment : Fragment() {
                 println(e.message.toString())
 
             }
-            view?.findNavController()
-                ?.navigate(R.id.action_customerNewScreenFragment_to_customerDetailsScreenFragment)
+
         }
 
     }
