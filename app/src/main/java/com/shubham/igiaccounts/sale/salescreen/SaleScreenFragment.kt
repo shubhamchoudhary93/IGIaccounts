@@ -25,6 +25,11 @@ class SaleScreenFragment : Fragment() {
     }
 
     private fun setListeners() {
+
+        binding.saleScreenNewButton.setOnClickListener {
+            view?.findNavController()
+                ?.navigate(R.id.action_customerScreenFragment_to_customerNewScreenFragment)
+        }
         binding.saleScreenListButton.setOnClickListener {
             view?.findNavController()
                 ?.navigate(R.id.action_saleListScreenFragment_to_saleDetailsScreenFragment)

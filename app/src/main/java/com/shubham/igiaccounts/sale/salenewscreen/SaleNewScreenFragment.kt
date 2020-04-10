@@ -13,7 +13,9 @@ import com.shubham.igiaccounts.database.sale.SaleDatabase
 import com.shubham.igiaccounts.databinding.SaleNewScreenBinding
 
 class SaleNewScreenFragment : Fragment() {
+
     private lateinit var binding: SaleNewScreenBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,14 +39,20 @@ class SaleNewScreenFragment : Fragment() {
         binding.saleNewScreenViewModel = saleNewScreenViewModel
 
         binding.lifecycleOwner = this
+        binding.newItemAdd.visibility = View.GONE
         setListeners()
         return binding.root
     }
 
     private fun setListeners() {
         binding.saleNewScreenAddItemTempButton.setOnClickListener {
-            view?.findNavController()
-                ?.navigate(R.id.action_saleNewScreenFragment_to_saleNewItemAddScreenFragment)
+            binding.newAdd.visibility = View.GONE
+            binding.newItemAdd.visibility = View.VISIBLE
+        }
+
+        binding.saleNewScreenAddItemTempButton.setOnClickListener {
+            binding.newAdd.visibility = View.VISIBLE
+            binding.newItemAdd.visibility = View.GONE
         }
         binding.saleNewScreenAddButton.setOnClickListener {
             view?.findNavController()

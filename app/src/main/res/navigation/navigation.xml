@@ -160,30 +160,10 @@
             app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/saleNewItemAddScreenFragment"
-        android:name="com.shubham.igiaccounts.sale.salenewitemaddscreen.SaleNewItemAddScreenFragment"
-        android:label="SaleNewItemAddScreenFragment"
-        tools:layout="@layout/sale_new_item_add_screen">
-        <action
-            android:id="@+id/action_saleNewItemAddScreenFragment_to_saleNewScreenFragment"
-            app:destination="@id/saleNewScreenFragment" />
-        <argument
-            android:name="saletempId"
-            android:defaultValue="0L"
-            app:argType="long" />
-        <argument
-            android:name="saleid"
-            android:defaultValue="0L"
-            app:argType="long" />
-    </fragment>
-    <fragment
         android:id="@+id/saleNewScreenFragment"
         android:name="com.shubham.igiaccounts.sale.salenewscreen.SaleNewScreenFragment"
         android:label="SaleNewScreenFragment"
         tools:layout="@layout/sale_new_screen">
-        <action
-            android:id="@+id/action_saleNewScreenFragment_to_saleNewItemAddScreenFragment"
-            app:destination="@id/saleNewItemAddScreenFragment" />
         <action
             android:id="@+id/action_saleNewScreenFragment_to_salePreviewScreenFragment"
             app:destination="@id/salePreviewScreenFragment" />

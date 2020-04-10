@@ -7,64 +7,121 @@
             name="saleNewScreenViewModel"
             type="com.shubham.igiaccounts.sale.salenewscreen.SaleNewScreenViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/sale_new_screen_screen_date_edit"
+        <LinearLayout
+            android:id="@+id/newAdd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/sale_new_screen_party_name_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            <EditText
+                android:id="@+id/sale_new_screen_screen_date_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
 
-        <TextView
-            android:id="@+id/sale_new_screen_item_temp_list_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Items list" />
+            <EditText
+                android:id="@+id/sale_new_screen_party_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
 
-        <Button
-            android:id="@+id/sale_new_screen_add_item_temp_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ADD ITMES" />
+            <TextView
+                android:id="@+id/sale_new_screen_item_temp_list_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Items list" />
 
-        <EditText
-            android:id="@+id/sale_new_screen_transport_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal" />
+            <Button
+                android:id="@+id/sale_new_screen_add_item_temp_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADD ITEMS" />
 
-        <EditText
-            android:id="@+id/sale_new_screen_others_charges_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal" />
+            <EditText
+                android:id="@+id/sale_new_screen_transport_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
 
-        <TextView
-            android:id="@+id/sale_new_screen_bill_total_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:text="Total Value" />
+            <EditText
+                android:id="@+id/sale_new_screen_others_charges_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
 
-        <Button
-            android:id="@+id/sale_new_screen_add_button"
+            <TextView
+                android:id="@+id/sale_new_screen_bill_total_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="Total Value" />
+
+            <Button
+                android:id="@+id/sale_new_screen_add_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/newItemAdd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/sale_new_item_add_screen_category_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/sale_new_item_add_screen_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/sale_new_item_add_screen_quantity_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/sale_new_item_add_screen_rate_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/sale_new_item_add_screen_percentage_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/sale_new_item_add_screen_add_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add" />
+        </LinearLayout>
     </LinearLayout>
 </layout>
