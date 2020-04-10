@@ -34,4 +34,7 @@ interface CustomerDatabaseDao {
 
     @Query("SELECT customerId FROM customer_data_table WHERE customer_name LIKE :searchText")
     fun searchCustomerID(searchText: String): Long?
+
+    @Query("SELECT customer_name FROM customer_data_table WHERE customerId = :id")
+    fun searchCustomerName(id: Long): String?
 }

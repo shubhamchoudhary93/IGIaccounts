@@ -39,12 +39,12 @@ class TransactionDetailsScreenFragment : Fragment() {
 
         binding.lifecycleOwner = this
         transactionDetailsScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
-            binding.transactionDetailScreenReceiptText.text =
-                transactionDetailsScreenViewModel.transaction.receipt.toString()
+            binding.transactionDetailScreenReceiptText.isChecked =
+                transactionDetailsScreenViewModel.transaction.receipt.toString().toBoolean()
             binding.transactionListScreenIdText.text =
                 transactionDetailsScreenViewModel.transaction.transactionId.toString()
             binding.transactionListScreenCustomernameText.text =
-                transactionDetailsScreenViewModel.transaction.transactionCustomerId.toString()
+                transactionDetailsScreenViewModel.customername
             binding.transactionListScreenAmountText.text =
                 transactionDetailsScreenViewModel.transaction.transactionAmount.toString()
             binding.transactionListScreenDateText.text =

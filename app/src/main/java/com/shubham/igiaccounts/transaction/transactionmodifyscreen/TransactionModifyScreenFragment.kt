@@ -42,9 +42,9 @@ class TransactionModifyScreenFragment : Fragment() {
 
         binding.lifecycleOwner = this
         transactionModifyScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
-            binding.transactionModifyScreenReceiptCheckbox.text =
-                transactionModifyScreenViewModel.transaction.receipt.toString()
-            binding.transactionModifyScreenNameEdit.setText(transactionModifyScreenViewModel.transaction.transactionCustomerId.toString())
+            binding.transactionModifyScreenReceiptCheckbox.isChecked =
+                transactionModifyScreenViewModel.transaction.receipt.toString().toBoolean()
+            binding.transactionModifyScreenNameEdit.setText(transactionModifyScreenViewModel.customername)
             binding.transactionModifyScreenAmountEdit.setText(transactionModifyScreenViewModel.transaction.transactionAmount.toString())
             binding.transactionModifyScreenDateEdit.setText(transactionModifyScreenViewModel.transaction.transactionDate)
             binding.transactionModifyScreenDetailsEdit.setText(transactionModifyScreenViewModel.transaction.transactionDetail.toString())
@@ -62,15 +62,16 @@ class TransactionModifyScreenFragment : Fragment() {
             var transaction = Transaction()
             transaction.receipt =
                 binding.transactionModifyScreenReceiptCheckbox.text.toString().toBoolean()
-            transaction.transactionCustomerId =
-                binding.transactionModifyScreenNameEdit.text.toString().toLong()
             transaction.transactionAmount =
                 binding.transactionModifyScreenAmountEdit.text.toString().toFloat()
             transaction.transactionDate =
                 binding.transactionModifyScreenDateEdit.text.toString()
             transaction.transactionDetail =
                 binding.transactionModifyScreenDetailsEdit.text.toString()
-            binding.transactionModifyScreenViewModel?.modifyTransaction(transaction)
+            binding.transactionModifyScreenViewModel?.modifyTransaction(
+                transaction,
+                binding.transactionModifyScreenNameEdit.text.toString()
+            )
             view?.findNavController()
                 ?.navigate(
                     TransactionModifyScreenFragmentDirections.actionTransactionModifyScreenFragmentToTransactionDetailsScreenFragment(

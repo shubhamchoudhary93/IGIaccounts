@@ -3,6 +3,7 @@ package com.shubham.igiaccounts.transaction.transactionmodifyscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.shubham.igiaccounts.database.customer.CustomerDatabase
 import com.shubham.igiaccounts.database.transaction.Transaction
 import com.shubham.igiaccounts.database.transaction.TransactionDatabaseDao
 import kotlinx.coroutines.*
@@ -14,10 +15,10 @@ class TransactionModifyScreenViewModel(
 
     var liveC = MutableLiveData<Boolean>()
     var transaction = Transaction()
-
+    var customername = "god"
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
+    private val database1 = CustomerDatabase.getInstance(application).customerDatabaseDao
     init {
         liveC.value = false
     }
@@ -40,17 +41,20 @@ class TransactionModifyScreenViewModel(
                         Transaction()
                     }
                 }
-
+                customername =
+                    withContext(Dispatchers.IO) { database1.searchCustomerName(transaction.transactionCustomerId)!! }
             }
             liveC.value = true
         }
     }
 
-    fun modifyTransaction(transaction1: Transaction) {
+    fun modifyTransaction(transaction1: Transaction, customernamenew: String) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 try {
                     transaction1.transactionId = transaction.transactionId
+                    transaction1.transactionCustomerId =
+                        database1.searchCustomerID(customernamenew)!!
                     database.update(transaction1)
                 } catch (e: Exception) {
                     e.printStackTrace()

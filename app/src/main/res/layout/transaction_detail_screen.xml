@@ -18,11 +18,11 @@
             android:layout_height="wrap_content"
             android:text="ID" />
 
-        <TextView
+        <CheckBox
             android:id="@+id/transaction_detail_screen_receipt_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Receipt" />
+            android:text="receipt" />
 
         <TextView
             android:id="@+id/transaction_list_screen_customername_text"
