@@ -9,10 +9,10 @@ import androidx.room.Update
 @Dao
 interface BillItemsTempDatabaseDao {
     @Insert
-    fun insert(customer: BillItemsTemp)
+    fun insert(billitemtemp: BillItemsTemp)
 
     @Update
-    fun update(customer: BillItemsTemp)
+    fun update(billitemtemp: BillItemsTemp)
 
     @Query("SELECT * from billitemstemp_data_table WHERE billitemstempId = :id")
     fun get(id: Long): BillItemsTemp?
@@ -26,4 +26,6 @@ interface BillItemsTempDatabaseDao {
     @Query("SELECT * FROM billitemstemp_data_table ORDER BY billitemstempId DESC LIMIT 1")
     fun getLastItem(): BillItemsTemp?
 
+    @Query("SELECT bill_items_temp_total FROM billitemstemp_data_table")
+    fun gettotals(): List<Float>
 }

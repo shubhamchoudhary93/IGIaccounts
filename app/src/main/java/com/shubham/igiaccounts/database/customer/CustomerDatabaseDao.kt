@@ -32,8 +32,8 @@ interface CustomerDatabaseDao {
     @Query("SELECT * FROM customer_data_table WHERE customer_name LIKE :searchText")
     fun searchCustomer(searchText: String): LiveData<List<Customer>>
 
-    @Query("SELECT customerId FROM customer_data_table WHERE customer_name LIKE :searchText")
-    fun searchCustomerID(searchText: String): Long?
+    @Query("SELECT customerId FROM customer_data_table WHERE customer_name = :searchText")
+    fun searchCustomerID(searchText: String): Long
 
     @Query("SELECT customer_name FROM customer_data_table WHERE customerId = :id")
     fun searchCustomerName(id: Long): String?

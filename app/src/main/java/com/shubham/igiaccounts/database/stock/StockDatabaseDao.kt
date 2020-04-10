@@ -32,5 +32,8 @@ interface StockDatabaseDao {
     @Query("SELECT * FROM Stock_data_table WHERE StockId LIKE :searchText")
     fun searchStock(searchText: String): LiveData<List<Stock>>
 
+    @Query("SELECT stockId FROM Stock_data_table WHERE stock_name = :searchText")
+    fun searchStockID(searchText: String): Long
+
 
 }

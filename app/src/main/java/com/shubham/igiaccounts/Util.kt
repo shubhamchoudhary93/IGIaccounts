@@ -5,6 +5,7 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
+import com.shubham.igiaccounts.database.billitemstemp.BillItemsTemp
 
 import com.shubham.igiaccounts.database.customer.Customer
 import com.shubham.igiaccounts.database.stock.Stock
@@ -38,11 +39,11 @@ fun formatCustomerList(customers: List<Customer>): Spanned {
     }
 }
 
-fun formatStockList(customers: List<Stock>): Spanned {
+fun formatStockList(stocks: List<Stock>): Spanned {
     val sb = StringBuilder()
     sb.apply {
         append("<H1>Stock List</H1>")
-        customers.forEach {
+        stocks.forEach {
             append("<br>")
             append("<b>StockID: </b>")
             append("\t${it.stockId}<br>")
@@ -63,6 +64,34 @@ fun formatStockList(customers: List<Stock>): Spanned {
     }
 }
 
+fun formatItemstemplist(itemstemp: List<BillItemsTemp>): Spanned {
+    val sb = StringBuilder()
+    sb.apply {
+        append("<H1>Items:</H1>")
+        itemstemp.forEach {
+            append("<br>")
+            append("<b>ItemTempID: </b>")
+            append("\t${it.billitemstempId}<br>")
+            append("<b>ItemId: </b>")
+            append("\t${it.billitemstempitemId}<br>")
+            append("<b>CustomerId: </b>")
+            append("\t${it.billitemstempCustomerID}<br>")
+            append("<b>Quantity: </b>")
+            append("\t${it.billitemstempQuantity}<br>")
+            append("<b>Rate: </b>")
+            append("\t${it.billitemstempRate}<br>")
+            append("<b>Percentage: </b>")
+            append("\t${it.billitemstempPercentage}<br>")
+            append("<b>Total: </b>")
+            append("\t${it.billitemstempTotal}<br>")
+        }
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+}
 
 fun formatTransactionList(customers: List<Transaction>): Spanned {
     val sb = StringBuilder()

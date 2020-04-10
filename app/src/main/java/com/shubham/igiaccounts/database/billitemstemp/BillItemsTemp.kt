@@ -9,7 +9,10 @@ class BillItemsTemp(
     @PrimaryKey(autoGenerate = true)
     var billitemstempId: Long = 0L,
 
-    @ColumnInfo(name = "bill_items_temp_current_balance")
+    @ColumnInfo(name = "bill_items_temp_item_id")
+    var billitemstempitemId: Long = 0L,
+
+    @ColumnInfo(name = "bill_items_temp_customer_id")
     var billitemstempCustomerID: Long = 0L,
 
     @ColumnInfo(name = "bill_items_temp_quantity")
