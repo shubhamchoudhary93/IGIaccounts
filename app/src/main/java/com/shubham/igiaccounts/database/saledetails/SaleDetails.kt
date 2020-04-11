@@ -13,7 +13,7 @@ class SaleDetails(
     val saledetailsLastsaleitem: Boolean = false,
 
     @ColumnInfo(name = "saledetails_stock_id")
-    var saledetailsStockID: Long = 0L,
+    var saledetailsStock: String = "",
 
     @ColumnInfo(name = "saledetails_quantity")
     var saledetailsQuantity: Float = 0.0F,

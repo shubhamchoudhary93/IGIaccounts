@@ -5,9 +5,8 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
-import com.shubham.igiaccounts.database.billitemstemp.BillItemsTemp
-
 import com.shubham.igiaccounts.database.customer.Customer
+import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTemp
 import com.shubham.igiaccounts.database.stock.Stock
 import com.shubham.igiaccounts.database.transaction.Transaction
 
@@ -64,26 +63,26 @@ fun formatStockList(stocks: List<Stock>): Spanned {
     }
 }
 
-fun formatItemstemplist(itemstemp: List<BillItemsTemp>): Spanned {
+fun formatItemsTemplist(itemsTemp: List<SaleItemsTemp>): Spanned {
     val sb = StringBuilder()
     sb.apply {
         append("<H1>Items:</H1>")
-        itemstemp.forEach {
+        itemsTemp.forEach {
             append("<br>")
             append("<b>ItemTempID: </b>")
-            append("\t${it.billitemstempId}<br>")
-            append("<b>ItemId: </b>")
-            append("\t${it.billitemstempitemId}<br>")
-            append("<b>CustomerId: </b>")
-            append("\t${it.billitemstempCustomerID}<br>")
+            append("\t${it.saleitemstempId}<br>")
+            append("<b>Item: </b>")
+            append("\t${it.saleitemstempitem}<br>")
+            append("<b>Customer: </b>")
+            append("\t${it.saleitemstempCustomer}<br>")
             append("<b>Quantity: </b>")
-            append("\t${it.billitemstempQuantity}<br>")
+            append("\t${it.saleitemstempQuantity}<br>")
             append("<b>Rate: </b>")
-            append("\t${it.billitemstempRate}<br>")
+            append("\t${it.saleitemstempRate}<br>")
             append("<b>Percentage: </b>")
-            append("\t${it.billitemstempPercentage}<br>")
+            append("\t${it.saleitemstempPercentage}<br>")
             append("<b>Total: </b>")
-            append("\t${it.billitemstempTotal}<br>")
+            append("\t${it.saleitemstempTotal}<br>")
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -101,8 +100,8 @@ fun formatTransactionList(customers: List<Transaction>): Spanned {
             append("<br>")
             append("<b>TransactionID: </b>")
             append("\t${it.transactionId}<br>")
-            append("<b>CustomerId: </b>")
-            append("\t${it.transactionCustomerId}<br>")
+            append("<b>Customer: </b>")
+            append("\t${it.transactionCustomer}<br>")
             append("<b>Amount: </b>")
             append("\t${it.transactionAmount}<br>")
             append("<b>Date: </b>")

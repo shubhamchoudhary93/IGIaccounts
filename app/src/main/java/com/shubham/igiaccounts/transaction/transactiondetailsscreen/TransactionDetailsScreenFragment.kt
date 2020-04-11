@@ -44,13 +44,13 @@ class TransactionDetailsScreenFragment : Fragment() {
             binding.transactionListScreenIdText.text =
                 transactionDetailsScreenViewModel.transaction.transactionId.toString()
             binding.transactionListScreenCustomernameText.text =
-                transactionDetailsScreenViewModel.customername
+                transactionDetailsScreenViewModel.transaction.transactionCustomer
             binding.transactionListScreenAmountText.text =
                 transactionDetailsScreenViewModel.transaction.transactionAmount.toString()
             binding.transactionListScreenDateText.text =
-                transactionDetailsScreenViewModel.transaction.transactionDate.toString()
+                transactionDetailsScreenViewModel.transaction.transactionDate
             binding.transactionListScreenDetailsText.text =
-                transactionDetailsScreenViewModel.transaction.transactionDetail.toString()
+                transactionDetailsScreenViewModel.transaction.transactionDetail
         })
         val args = TransactionDetailsScreenFragmentArgs.fromBundle(arguments!!)
         println(args.transactionid)

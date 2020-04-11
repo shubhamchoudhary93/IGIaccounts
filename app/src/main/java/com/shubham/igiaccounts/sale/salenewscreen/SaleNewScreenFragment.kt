@@ -40,10 +40,13 @@ class SaleNewScreenFragment : Fragment() {
         binding.saleNewScreenViewModel = saleNewScreenViewModel
 
         binding.lifecycleOwner = this
-        saleNewScreenViewModel.tempitemsString.observe(
+        saleNewScreenViewModel.tempItemsString.observe(
             viewLifecycleOwner,
             Observer { tempitemsString ->
                 binding.saleNewScreenItemTempListText.text = tempitemsString.toString()
+                binding.saleNewScreenBillTotalEdit.text =
+                    "Total : " + saleNewScreenViewModel.total
+                saleNewScreenViewModel.total = 0F
             })
         binding.newItemAdd.visibility = View.GONE
         setListeners()
@@ -59,15 +62,36 @@ class SaleNewScreenFragment : Fragment() {
         binding.saleNewItemAddScreenAddButton.setOnClickListener {
             binding.newAdd.visibility = View.VISIBLE
             binding.newItemAdd.visibility = View.GONE
+
+            val partyName =
+                if (binding.saleNewScreenPartyNameEdit.text.toString() == "") "God" else binding.saleNewScreenPartyNameEdit.text.toString()
+            val itemName =
+                if (binding.saleNewItemAddScreenNameEdit.text.toString() == "") "God" else binding.saleNewItemAddScreenNameEdit.text.toString()
+            val quantity =
+                if (binding.saleNewItemAddScreenQuantityEdit.text.toString() == "") 0F else binding.saleNewItemAddScreenQuantityEdit.text.toString()
+                    .toFloat()
+            val rate =
+                if (binding.saleNewItemAddScreenRateEdit.text.toString() == "") 0F else binding.saleNewItemAddScreenRateEdit.text.toString()
+                    .toFloat()
+            val percentage =
+                if (binding.saleNewItemAddScreenPercentageEdit.text.toString() == "") 0F else binding.saleNewItemAddScreenPercentageEdit.text.toString()
+                    .toFloat()
+            val transport =
+                if (binding.saleNewScreenTransportEdit.text.toString() == "") 0F else binding.saleNewScreenTransportEdit.text.toString()
+                    .toFloat()
+            val otherCharges =
+                if (binding.saleNewScreenOthersChargesEdit.text.toString() == "") 0F else binding.saleNewScreenOthersChargesEdit.text.toString()
+                    .toFloat()
             binding.saleNewScreenViewModel?.addNewItemTemp(
-                binding.saleNewScreenPartyNameEdit.text.toString(),
-                binding.saleNewItemAddScreenNameEdit.text.toString(),
-                binding.saleNewItemAddScreenQuantityEdit.text.toString().toFloat(),
-                binding.saleNewItemAddScreenRateEdit.text.toString().toFloat(),
-                binding.saleNewItemAddScreenPercentageEdit.text.toString().toFloat()
+                partyName,
+                itemName,
+                quantity,
+                rate,
+                percentage,
+                transport,
+                otherCharges.toFloat()
             )
-            binding.saleNewScreenBillTotalEdit.text =
-                binding.saleNewScreenViewModel?.total.toString()
+
         }
         binding.saleNewScreenAddButton.setOnClickListener {
             view?.findNavController()

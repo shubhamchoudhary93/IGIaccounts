@@ -44,7 +44,7 @@ class TransactionModifyScreenFragment : Fragment() {
         transactionModifyScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
             binding.transactionModifyScreenReceiptCheckbox.isChecked =
                 transactionModifyScreenViewModel.transaction.receipt.toString().toBoolean()
-            binding.transactionModifyScreenNameEdit.setText(transactionModifyScreenViewModel.customername)
+            binding.transactionModifyScreenNameEdit.setText(transactionModifyScreenViewModel.transaction.transactionCustomer)
             binding.transactionModifyScreenAmountEdit.setText(transactionModifyScreenViewModel.transaction.transactionAmount.toString())
             binding.transactionModifyScreenDateEdit.setText(transactionModifyScreenViewModel.transaction.transactionDate)
             binding.transactionModifyScreenDetailsEdit.setText(transactionModifyScreenViewModel.transaction.transactionDetail.toString())
@@ -69,8 +69,7 @@ class TransactionModifyScreenFragment : Fragment() {
             transaction.transactionDetail =
                 binding.transactionModifyScreenDetailsEdit.text.toString()
             binding.transactionModifyScreenViewModel?.modifyTransaction(
-                transaction,
-                binding.transactionModifyScreenNameEdit.text.toString()
+                transaction
             )
             view?.findNavController()
                 ?.navigate(

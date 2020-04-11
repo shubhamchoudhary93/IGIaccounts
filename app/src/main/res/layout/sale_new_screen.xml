@@ -88,8 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/sale_new_item_add_screen_quantity_edit"

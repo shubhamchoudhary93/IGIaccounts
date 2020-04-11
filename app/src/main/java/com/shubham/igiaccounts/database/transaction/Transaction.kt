@@ -13,8 +13,8 @@ class Transaction(
     @ColumnInfo(name = "transaction_receipt")
     var receipt: Boolean = true,
 
-    @ColumnInfo(name = "transaction_customerId")
-    var transactionCustomerId: Long = 0L,
+    @ColumnInfo(name = "transaction_customer")
+    var transactionCustomer: String = "",
 
     @ColumnInfo(name = "transaction_amount")
     var transactionAmount: Float = 0.0F,

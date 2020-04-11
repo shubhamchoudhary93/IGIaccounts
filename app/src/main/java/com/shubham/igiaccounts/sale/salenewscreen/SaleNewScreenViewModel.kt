@@ -4,12 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.shubham.igiaccounts.database.billitemstemp.BillItemsTemp
-import com.shubham.igiaccounts.database.billitemstemp.BillItemsTempDatabase
-import com.shubham.igiaccounts.database.customer.CustomerDatabase
 import com.shubham.igiaccounts.database.sale.SaleDatabaseDao
-import com.shubham.igiaccounts.database.stock.StockDatabase
-import com.shubham.igiaccounts.formatItemstemplist
+import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTemp
+import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTempDatabase
+import com.shubham.igiaccounts.formatItemsTemplist
 import kotlinx.coroutines.*
 
 class SaleNewScreenViewModel(
@@ -22,81 +20,69 @@ class SaleNewScreenViewModel(
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val databasecustomer = CustomerDatabase.getInstance(application).customerDatabaseDao
-    val databasebilltemp = BillItemsTempDatabase.getInstance(application).billItemsTempDatabaseDao
-    val databasestock = StockDatabase.getInstance(application).stockDatabaseDao
-    var itemstemplist = databasebilltemp.getAllItems()
-    val tempitemsString =
-        Transformations.map(itemstemplist) { itemstemplist -> formatItemstemplist(itemstemplist) }
-    var itemid = 0L
-    var customerid = 0L
+    private val databaseSaleTemp =
+        SaleItemsTempDatabase.getInstance(application).saleItemsTempDatabaseDao
+    var itemsTempList = databaseSaleTemp.getAllItems()
+    val tempItemsString =
+        Transformations.map(itemsTempList) { itemsTempList -> formatItemsTemplist(itemsTempList) }
     var total = 0F
-    private var noOfItems = MutableLiveData<Int>()
+    private var noOfItems = 0
 
     init {
         liveC.value = 0
-        noOfItems.value = 0
     }
 
     fun addNewItemTemp(
         name: String,
-        customername: String,
+        customerName: String,
         quantity: Float,
         rate: Float,
-        percentage: Float
+        percentage: Float,
+        transport: Float,
+        otherCharges: Float
     ) {
-        noOfItems.value?.plus(1)
-        fetchitemId(name)
-        fetchcustomerId(customername)
-        billtempinsert(
-            billitemtemp = BillItemsTemp(
+        noOfItems.plus(1)
+//        if (quantity == null) quantity = 0.0F
+        saleTempInsert(
+            saleItemTemp = SaleItemsTemp(
                 0,
-                itemid,
-                customerid,
+                name,
+                customerName,
                 quantity,
                 rate,
                 percentage,
                 quantity * rate * percentage
             )
         )
-        fetchitemstemplist()
+        fetchItemsTempList(transport, otherCharges)
 
     }
 
-    fun billtempinsert(billitemtemp: BillItemsTemp) {
+    private fun saleTempInsert(saleItemTemp: SaleItemsTemp) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                databasebilltemp.insert(
-                    billitemtemp
+                databaseSaleTemp.insert(
+                    saleItemTemp
                 )
             }
         }
     }
 
-    fun fetchitemId(name: String) {
+    private fun fetchItemsTempList(
+        transport: Float,
+        otherCharges: Float
+    ) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                itemid = databasestock.searchStockID(name)
+                itemsTempList = databaseSaleTemp.getAllItems()
 
-            }
-        }
-    }
-
-    fun fetchcustomerId(name: String) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                customerid = databasecustomer.searchCustomerID(name)
-            }
-        }
-    }
-
-    fun fetchitemstemplist() {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                itemstemplist = databasebilltemp.getAllItems()
-
-                val totalall = databasebilltemp.gettotals()
-                totalall.forEach { total = total.plus(total) }
+                val totalAll = databaseSaleTemp.gettotals()
+                totalAll.forEach { total -> total.plus(total) }
+                for (total1 in totalAll) {
+                    total += total1
+                }
+                total += transport
+                total += otherCharges
             }
 
         }
