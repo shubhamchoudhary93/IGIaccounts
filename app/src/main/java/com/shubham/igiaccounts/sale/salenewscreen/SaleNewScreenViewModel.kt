@@ -4,10 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.shubham.igiaccounts.database.sale.Sale
 import com.shubham.igiaccounts.database.sale.SaleDatabaseDao
-import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTemp
-import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTempDatabase
-import com.shubham.igiaccounts.formatItemsTemplist
+import com.shubham.igiaccounts.database.saledetails.SaleDetails
+import com.shubham.igiaccounts.database.saledetails.SaleDetailsDatabase
+import com.shubham.igiaccounts.formatItemslist
 import kotlinx.coroutines.*
 
 class SaleNewScreenViewModel(
@@ -20,19 +21,25 @@ class SaleNewScreenViewModel(
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val databaseSaleTemp =
-        SaleItemsTempDatabase.getInstance(application).saleItemsTempDatabaseDao
-    var itemsTempList = databaseSaleTemp.getAllItems()
-    val tempItemsString =
-        Transformations.map(itemsTempList) { itemsTempList -> formatItemsTemplist(itemsTempList) }
-    var total = 0F
-    private var noOfItems = 0
+    private val databaseSaleDetails =
+        SaleDetailsDatabase.getInstance(application).saleDetailsDatabaseDao
+    var itemsList = databaseSaleDetails.getAllSaleDetails()
+    var itemsString =
+        Transformations.map(itemsList) { itemsList -> formatItemslist(itemsList) }
+    var total: Float
+    private var noOfItems: Long
+    var lastSaleId: Long
+
+    private var saleDetailsIdList = mutableListOf<Long>()
 
     init {
         liveC.value = 0
+        total = 0F
+        noOfItems = 0L
+        lastSaleId = 0L
     }
 
-    fun addNewItemTemp(
+    fun addNewItem(
         name: String,
         customerName: String,
         quantity: Float,
@@ -42,9 +49,9 @@ class SaleNewScreenViewModel(
         otherCharges: Float
     ) {
         noOfItems.plus(1)
-//        if (quantity == null) quantity = 0.0F
-        saleTempInsert(
-            saleItemTemp = SaleItemsTemp(
+        saleDetailsInsert(
+            saleDetails = SaleDetails(
+                0,
                 0,
                 name,
                 customerName,
@@ -58,12 +65,59 @@ class SaleNewScreenViewModel(
 
     }
 
-    private fun saleTempInsert(saleItemTemp: SaleItemsTemp) {
+    private fun saleDetailsInsert(saleDetails: SaleDetails) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                databaseSaleTemp.insert(
-                    saleItemTemp
+                databaseSaleDetails.insert(
+                    saleDetails
                 )
+                var id = databaseSaleDetails.getLastSaleDetailsID()
+                saleDetailsIdList.add(id)
+            }
+        }
+    }
+
+    fun addSale(
+        cash: Boolean,
+        date: String,
+        customerName: String,
+        transport: Float,
+        otherCharges: Float
+    ) {
+        saleSaleInsert(
+            sale = Sale(
+                0,
+                cash,
+                date,
+                customerName,
+                noOfItems,
+                transport,
+                otherCharges,
+                total
+            )
+
+        )
+
+    }
+
+    private fun saleSaleInsert(sale: Sale) {
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                database.insert(
+                    sale
+                )
+                println(sale.saleCash)
+                println(sale.saleAmount)
+                println(sale.saleNoOfItems)
+                lastSaleId = database.getLastSaleID()
+                println("funct last sale id : " + lastSaleId)
+                saleDetailsIdList.forEach {
+                    databaseSaleDetails.updateSaleDetailsId(
+                        it,
+                        lastSaleId
+                    )
+                }
+
             }
         }
     }
@@ -74,10 +128,10 @@ class SaleNewScreenViewModel(
     ) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                itemsTempList = databaseSaleTemp.getAllItems()
+                itemsList = databaseSaleDetails.getAllSaleDetails()
 
-                val totalAll = databaseSaleTemp.gettotals()
-                totalAll.forEach { total -> total.plus(total) }
+                val totalAll = databaseSaleDetails.getTotals()
+                total = 0F
                 for (total1 in totalAll) {
                     total += total1
                 }

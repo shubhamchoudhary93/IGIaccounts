@@ -10,21 +10,24 @@ class Sale(
     @PrimaryKey(autoGenerate = true)
     var saleId: Long = 0L,
 
+    @ColumnInfo(name = "sale_cash")
+    var saleCash: Boolean = false,
+
     @ColumnInfo(name = "sale_date")
     val saleDate: String = Date().toString(),
 
-    @ColumnInfo(name = "sale_sale_details_id")
-    var saleSaleDetailsID: Long = 0L,
+    @ColumnInfo(name = "sale_customer")
+    var saleCustomer: String = "",
 
     @ColumnInfo(name = "sale_no_of_items")
     var saleNoOfItems: Long = 0L,
 
+    @ColumnInfo(name = "sale_transport")
+    var saleTransport: Float = 0.0F,
+
+    @ColumnInfo(name = "sale_other_charges")
+    var saleOtherCharges: Float = 0.0F,
+
     @ColumnInfo(name = "sale_amount")
-    var saleAmount: Float = 0.0F,
-
-    @ColumnInfo(name = "sale_current_balance")
-    var saleCash: Boolean = false,
-
-    @ColumnInfo(name = "sale_customer_id")
-    var saleCustomerID: Long = 0L
+    var saleAmount: Float = 0.0F
 )

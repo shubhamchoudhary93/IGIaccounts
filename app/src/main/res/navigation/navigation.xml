@@ -182,10 +182,6 @@
         android:label="SalePreviewScreenFragment"
         tools:layout="@layout/sale_preview_screen">
         <argument
-            android:name="saletempId"
-            android:defaultValue="0L"
-            app:argType="long" />
-        <argument
             android:name="saleId"
             android:defaultValue="0L"
             app:argType="long" />

@@ -19,15 +19,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <CheckBox
+                android:id="@+id/sale_new_screen_cash_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Cash" />
+
             <EditText
-                android:id="@+id/sale_new_screen_screen_date_edit"
+                android:id="@+id/sale_new_screen_date_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="date" />
 
             <EditText
-                android:id="@+id/sale_new_screen_party_name_edit"
+                android:id="@+id/sale_new_screen_customer_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -35,7 +42,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
+                android:layout_height="330dp">
             <TextView
                 android:id="@+id/sale_new_screen_item_temp_list_text"
                 android:layout_width="match_parent"
@@ -43,7 +50,7 @@
                 android:text="Items list" />
             </ScrollView>
             <Button
-                android:id="@+id/sale_new_screen_add_item_temp_button"
+                android:id="@+id/sale_new_screen_add_item_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ADD ITEMS" />
@@ -66,15 +73,14 @@
                 android:id="@+id/sale_new_screen_bill_total_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="Total Value" />
+                android:ems="10" />
 
             <Button
                 android:id="@+id/sale_new_screen_add_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ADD BILL" />
+
         </LinearLayout>
 
         <LinearLayout

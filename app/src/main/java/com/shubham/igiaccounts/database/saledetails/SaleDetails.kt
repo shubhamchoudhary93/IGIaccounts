@@ -7,23 +7,26 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "sale_details_data_table")
 class SaleDetails(
     @PrimaryKey(autoGenerate = true)
-    var saledetailsId: Long = 0L,
+    var saleDetailsId: Long = 0L,
 
-    @ColumnInfo(name = "saledetails_last_sale_item")
-    val saledetailsLastsaleitem: Boolean = false,
+    @ColumnInfo(name = "sale_details_sale_id")
+    var saleDetailsSaleId: Long = 0L,
 
-    @ColumnInfo(name = "saledetails_stock_id")
-    var saledetailsStock: String = "",
+    @ColumnInfo(name = "sale_details_customer")
+    var saleDetailsCustomer: String = "",
 
-    @ColumnInfo(name = "saledetails_quantity")
-    var saledetailsQuantity: Float = 0.0F,
+    @ColumnInfo(name = "sale_details_item")
+    var saleDetailsItem: String = "",
 
-    @ColumnInfo(name = "saledetails_rate")
-    var saledetailsRate: Float = 0.0F,
+    @ColumnInfo(name = "sale_details_quantity")
+    var saleDetailsQuantity: Float = 0.0F,
 
-    @ColumnInfo(name = "saledetails_percentage")
-    var saledetailsPercentage: Float = 0.0F,
+    @ColumnInfo(name = "sale_details_rate")
+    var saleDetailsRate: Float = 0.0F,
 
-    @ColumnInfo(name = "saledetails_total")
-    var saledetailsTotal: Float = 0.0F
+    @ColumnInfo(name = "sale_details_percentage")
+    var saleDetailsPercentage: Float = 0.0F,
+
+    @ColumnInfo(name = "sale_details_total")
+    var saleDetailsTotal: Float = 0.0F
 )

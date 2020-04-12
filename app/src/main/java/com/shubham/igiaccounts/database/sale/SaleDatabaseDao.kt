@@ -27,9 +27,12 @@ interface SaleDatabaseDao {
     fun getAllSales(): LiveData<List<Sale>>
 
     @Query("SELECT * FROM sale_data_table ORDER BY saleId DESC LIMIT 1")
-    fun getLastCustomer(): Sale
+    fun getLastSale(): Sale
 
-    @Query("SELECT * FROM sale_data_table WHERE sale_date LIKE :searchText")
+    @Query("SELECT * FROM sale_data_table WHERE sale_date = :searchText")
     fun searchSale(searchText: String): LiveData<List<Sale>>
+
+    @Query("SELECT saleId FROM sale_data_table ORDER BY saleId DESC LIMIT 1")
+    fun getLastSaleID(): Long
 
 }

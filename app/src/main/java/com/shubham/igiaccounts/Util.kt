@@ -6,7 +6,7 @@ import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import com.shubham.igiaccounts.database.customer.Customer
-import com.shubham.igiaccounts.database.saleitemstemp.SaleItemsTemp
+import com.shubham.igiaccounts.database.saledetails.SaleDetails
 import com.shubham.igiaccounts.database.stock.Stock
 import com.shubham.igiaccounts.database.transaction.Transaction
 
@@ -63,26 +63,28 @@ fun formatStockList(stocks: List<Stock>): Spanned {
     }
 }
 
-fun formatItemsTemplist(itemsTemp: List<SaleItemsTemp>): Spanned {
+fun formatItemslist(itemsTemp: List<SaleDetails>): Spanned {
     val sb = StringBuilder()
     sb.apply {
         append("<H1>Items:</H1>")
         itemsTemp.forEach {
             append("<br>")
-            append("<b>ItemTempID: </b>")
-            append("\t${it.saleitemstempId}<br>")
+            append("<b>SaleDetailsID: </b>")
+            append("\t${it.saleDetailsId}<br>")
+            append("<b>SaleID: </b>")
+            append("\t${it.saleDetailsSaleId}<br>")
             append("<b>Item: </b>")
-            append("\t${it.saleitemstempitem}<br>")
+            append("\t${it.saleDetailsItem}<br>")
             append("<b>Customer: </b>")
-            append("\t${it.saleitemstempCustomer}<br>")
+            append("\t${it.saleDetailsCustomer}<br>")
             append("<b>Quantity: </b>")
-            append("\t${it.saleitemstempQuantity}<br>")
+            append("\t${it.saleDetailsQuantity}<br>")
             append("<b>Rate: </b>")
-            append("\t${it.saleitemstempRate}<br>")
+            append("\t${it.saleDetailsRate}<br>")
             append("<b>Percentage: </b>")
-            append("\t${it.saleitemstempPercentage}<br>")
+            append("\t${it.saleDetailsPercentage}<br>")
             append("<b>Total: </b>")
-            append("\t${it.saleitemstempTotal}<br>")
+            append("\t${it.saleDetailsTotal}<br>")
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

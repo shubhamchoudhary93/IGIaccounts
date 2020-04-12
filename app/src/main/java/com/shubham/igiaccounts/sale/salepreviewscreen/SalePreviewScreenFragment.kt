@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.shubham.igiaccounts.R
@@ -37,12 +38,33 @@ class SalePreviewScreenFragment : Fragment() {
         binding.salePreviewScreenViewModel = salePreviewScreenViewModel
 
         binding.lifecycleOwner = this
+        salePreviewScreenViewModel.liveC.observe(viewLifecycleOwner, Observer {
+            binding.salePreviewScreenIdText.text =
+                salePreviewScreenViewModel.sale.saleId.toString()
+            binding.salePreviewScreenCustomerIdText.text =
+                salePreviewScreenViewModel.sale.saleCustomer
+            binding.salePreviewScreenDateText.text =
+                salePreviewScreenViewModel.sale.saleDate
+            binding.salePreviewScreenItemListText.text =
+                salePreviewScreenViewModel.sale.saleNoOfItems.toString()
+            binding.salePreviewScreenTransportValueText.text =
+                salePreviewScreenViewModel.sale.saleTransport.toString()
+            binding.salePreviewScreenOtherChargesValueText.text =
+                salePreviewScreenViewModel.sale.saleOtherCharges.toString()
+            binding.salePreviewScreenCashEdit.isChecked =
+                salePreviewScreenViewModel.sale.saleCash
+            binding.salePreviewScreenBillAmountValueText.text =
+                salePreviewScreenViewModel.sale.saleAmount.toString()
+        })
+        val args = SalePreviewScreenFragmentArgs.fromBundle(arguments!!)
+        println(args.saleId)
+        salePreviewScreenViewModel.fetchCustomer(args.saleId)
         setListeners()
         return binding.root
     }
 
     private fun setListeners() {
-        binding.salePreviewScreenAddButton.setOnClickListener {
+        binding.salePreviewScreenModifyButton.setOnClickListener {
             view?.findNavController()
                 ?.navigate(R.id.action_saleNewScreenFragment_to_salePreviewScreenFragment)
         }
