@@ -42,18 +42,20 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="330dp">
-            <TextView
-                android:id="@+id/sale_new_screen_item_temp_list_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Items list" />
+                android:layout_height="360dp">
+
+                <TextView
+                    android:id="@+id/sale_new_screen_item_list_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Items list" />
             </ScrollView>
+
             <Button
                 android:id="@+id/sale_new_screen_add_item_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ADD ITEMS" />
+                android:text="ADD ITEM" />
 
             <EditText
                 android:id="@+id/sale_new_screen_transport_edit"
@@ -69,17 +71,11 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/sale_new_screen_bill_total_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10" />
-
             <Button
                 android:id="@+id/sale_new_screen_add_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ADD BILL" />
+                android:text="ADD SALE" />
 
         </LinearLayout>
 

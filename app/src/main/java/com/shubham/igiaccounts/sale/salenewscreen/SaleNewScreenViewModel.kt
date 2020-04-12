@@ -16,65 +16,33 @@ class SaleNewScreenViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    var liveC = MutableLiveData<Int>()
-
-
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val databaseSaleDetails =
         SaleDetailsDatabase.getInstance(application).saleDetailsDatabaseDao
-    var itemsList = databaseSaleDetails.getAllSaleDetails()
+
+    var customerName: String = "God"
+
+    private var itemsList: MutableList<SaleDetails> = ArrayList()
+    private var itemLiveList = MutableLiveData<List<SaleDetails>>()
     var itemsString =
-        Transformations.map(itemsList) { itemsList -> formatItemslist(itemsList) }
-    var total: Float
-    private var noOfItems: Long
-    var lastSaleId: Long
+        Transformations.map(itemLiveList) { itemLiveList -> formatItemslist(itemLiveList) }
 
-    private var saleDetailsIdList = mutableListOf<Long>()
-
-    init {
-        liveC.value = 0
-        total = 0F
-        noOfItems = 0L
-        lastSaleId = 0L
-    }
-
-    fun addNewItem(
-        name: String,
-        customerName: String,
-        quantity: Float,
-        rate: Float,
-        percentage: Float,
-        transport: Float,
-        otherCharges: Float
-    ) {
-        noOfItems.plus(1)
-        saleDetailsInsert(
-            saleDetails = SaleDetails(
-                0,
-                0,
-                name,
-                customerName,
-                quantity,
-                rate,
-                percentage,
-                quantity * rate * percentage
-            )
+    fun addItemToList(itemName: String, quantity: Float, rate: Float, percentage: Float) {
+        var saleDetails = SaleDetails(
+            0L,
+            0L,
+            customerName,
+            itemName,
+            quantity,
+            rate,
+            percentage,
+            quantity * rate * percentage
         )
-        fetchItemsTempList(transport, otherCharges)
 
-    }
+        itemsList.add(saleDetails)
+        itemLiveList.value = itemsList
 
-    private fun saleDetailsInsert(saleDetails: SaleDetails) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                databaseSaleDetails.insert(
-                    saleDetails
-                )
-                var id = databaseSaleDetails.getLastSaleDetailsID()
-                saleDetailsIdList.add(id)
-            }
-        }
     }
 
     fun addSale(
@@ -84,62 +52,149 @@ class SaleNewScreenViewModel(
         transport: Float,
         otherCharges: Float
     ) {
-        saleSaleInsert(
-            sale = Sale(
-                0,
-                cash,
-                date,
-                customerName,
-                noOfItems,
-                transport,
-                otherCharges,
-                total
-            )
+        var amount = 0F
+        itemsList.forEach { amount += it.saleDetailsTotal }
+        amount += transport
+        amount += otherCharges
 
-        )
-
+        saleInsert(sale = Sale(0L, cash, date, customerName, transport, otherCharges, amount))
     }
 
-    private fun saleSaleInsert(sale: Sale) {
+    private fun saleInsert(sale: Sale) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 database.insert(
                     sale
                 )
-                println(sale.saleCash)
-                println(sale.saleAmount)
-                println(sale.saleNoOfItems)
-                lastSaleId = database.getLastSaleID()
+                var lastSaleId = database.getLastSaleID()
                 println("funct last sale id : " + lastSaleId)
-                saleDetailsIdList.forEach {
-                    databaseSaleDetails.updateSaleDetailsId(
-                        it,
-                        lastSaleId
-                    )
-                }
-
-            }
-        }
-    }
-
-    private fun fetchItemsTempList(
-        transport: Float,
-        otherCharges: Float
-    ) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                itemsList = databaseSaleDetails.getAllSaleDetails()
-
-                val totalAll = databaseSaleDetails.getTotals()
-                total = 0F
-                for (total1 in totalAll) {
-                    total += total1
-                }
-                total += transport
-                total += otherCharges
+                databaseSaleDetails.updateSaleDetailsId(
+                    lastSaleId
+                )
             }
 
         }
-        liveC.value = liveC.value?.plus(1)
     }
 }
+
+
+//
+//
+//
+//    private val databaseSaleDetails =
+//        SaleDetailsDatabase.getInstance(application).saleDetailsDatabaseDao
+//    var total: Float
+//    private var noOfItems: Long
+//    var lastSaleId: Long
+//
+//    private var saleDetailsIdList = mutableListOf<Long>()
+//
+//    init {
+//        liveC.value = 0
+//        total = 0F
+//        noOfItems = 0L
+//        lastSaleId = 0L
+//    }
+//
+//    fun addNewItem(
+//        name: String,
+//        customerName: String,
+//        quantity: Float,
+//        rate: Float,
+//        percentage: Float,
+//        transport: Float,
+//        otherCharges: Float
+//    ) {
+//        noOfItems.plus(1)
+//        saleDetailsInsert(
+//            saleDetails = SaleDetails(
+//                0,
+//                0,
+//                name,
+//                customerName,
+//                quantity,
+//                rate,
+//                percentage,
+//                quantity * rate * percentage
+//            )
+//        )
+//        fetchItemsTempList(transport, otherCharges)
+//
+//    }
+//
+//    private fun saleDetailsInsert(saleDetails: SaleDetails) {
+//        uiScope.launch {
+//            withContext(Dispatchers.IO) {
+//                databaseSaleDetails.insert(
+//                    saleDetails
+//                )
+//                var id = databaseSaleDetails.getLastSaleDetailsID()
+//                saleDetailsIdList.add(id)
+//            }
+//        }
+//    }
+//
+//    fun addSale(
+//        cash: Boolean,
+//        date: String,
+//        customerName: String,
+//        transport: Float,
+//        otherCharges: Float
+//    ) {
+//        saleSaleInsert(
+//            sale = Sale(
+//                0,
+//                cash,
+//                date,
+//                customerName,
+//                noOfItems,
+//                transport,
+//                otherCharges,
+//                total
+//            )
+//        )
+//    }
+//
+//    private fun saleSaleInsert(sale: Sale) {
+//        uiScope.launch {
+//            withContext(Dispatchers.IO) {
+//                database.insert(
+//                    sale
+//                )
+//                println(sale.saleCash)
+//                println(sale.saleAmount)
+//                println(sale.saleNoOfItems)
+//                lastSaleId = database.getLastSaleID()
+//                println("funct last sale id : " + lastSaleId)
+//                saleDetailsIdList.forEach {
+//                    databaseSaleDetails.updateSaleDetailsId(
+//                        it,
+//                        lastSaleId
+//                    )
+//                }
+//
+//            }
+//        }
+//    }
+//
+//    private fun fetchItemsTempList(
+//        transport: Float,
+//        otherCharges: Float
+//    ) {
+//        uiScope.launch {
+//            withContext(Dispatchers.IO) {
+//                itemsList = databaseSaleDetails.getAllSaleDetails()
+//
+//                val totalAll = databaseSaleDetails.getTotals()
+//                total = 0F
+//                for (total1 in totalAll) {
+//                    total += total1
+//                }
+//                total += transport
+//                total += otherCharges
+//            }
+//
+//        }
+//        liveC.value = liveC.value?.plus(1)
+//    }
+//}

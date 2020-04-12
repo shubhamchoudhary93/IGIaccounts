@@ -19,9 +19,6 @@ class Sale(
     @ColumnInfo(name = "sale_customer")
     var saleCustomer: String = "",
 
-    @ColumnInfo(name = "sale_no_of_items")
-    var saleNoOfItems: Long = 0L,
-
     @ColumnInfo(name = "sale_transport")
     var saleTransport: Float = 0.0F,
 

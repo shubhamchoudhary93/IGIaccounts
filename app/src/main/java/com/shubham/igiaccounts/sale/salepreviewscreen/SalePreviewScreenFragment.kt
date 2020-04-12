@@ -45,8 +45,6 @@ class SalePreviewScreenFragment : Fragment() {
                 salePreviewScreenViewModel.sale.saleCustomer
             binding.salePreviewScreenDateText.text =
                 salePreviewScreenViewModel.sale.saleDate
-            binding.salePreviewScreenItemListText.text =
-                salePreviewScreenViewModel.sale.saleNoOfItems.toString()
             binding.salePreviewScreenTransportValueText.text =
                 salePreviewScreenViewModel.sale.saleTransport.toString()
             binding.salePreviewScreenOtherChargesValueText.text =

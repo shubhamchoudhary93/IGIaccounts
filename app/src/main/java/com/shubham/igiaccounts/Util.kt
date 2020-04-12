@@ -1,10 +1,8 @@
 package com.shubham.igiaccounts
 
 
-import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import androidx.core.text.HtmlCompat
 import com.shubham.igiaccounts.database.customer.Customer
 import com.shubham.igiaccounts.database.saledetails.SaleDetails
 import com.shubham.igiaccounts.database.stock.Stock
@@ -31,11 +29,7 @@ fun formatCustomerList(customers: List<Customer>): Spanned {
 
         }
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
 }
 
 fun formatStockList(stocks: List<Stock>): Spanned {
@@ -56,11 +50,7 @@ fun formatStockList(stocks: List<Stock>): Spanned {
             append("\t${it.stockPercentage}<br>")
         }
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
 }
 
 fun formatItemslist(itemsTemp: List<SaleDetails>): Spanned {
@@ -87,11 +77,7 @@ fun formatItemslist(itemsTemp: List<SaleDetails>): Spanned {
             append("\t${it.saleDetailsTotal}<br>")
         }
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
 }
 
 fun formatTransactionList(customers: List<Transaction>): Spanned {
@@ -112,9 +98,5 @@ fun formatTransactionList(customers: List<Transaction>): Spanned {
             append("\t${it.transactionDetail}<br>")
         }
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
 }

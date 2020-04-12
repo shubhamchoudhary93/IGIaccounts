@@ -32,6 +32,6 @@ interface SaleDetailsDatabaseDao {
     @Query("SELECT SaleDetailsId FROM sale_details_data_table ORDER BY SaleDetailsId DESC LIMIT 1")
     fun getLastSaleDetailsID(): Long
 
-    @Query("UPDATE sale_details_data_table SET sale_details_sale_id = :saleId WHERE SaleDetailsId = :saleDetailsId ")
-    fun updateSaleDetailsId(saleDetailsId: Long, saleId: Long)
+    @Query("UPDATE sale_details_data_table SET sale_details_sale_id = :saleId WHERE SaleDetailsId = 0 ")
+    fun updateSaleDetailsId(saleId: Long)
 }
